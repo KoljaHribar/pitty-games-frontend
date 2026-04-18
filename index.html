@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Pitty Games — daily Pitt-themed games: Grid, Bingo, Wordle, Connections."
+    />
+    <title>Pitty Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#games">Skip to games</a>
+
+    <header class="site-header" role="banner">
+      <div class="header-top">
+        <div class="header-spacer" aria-hidden="true"></div>
+        <div class="header-brand">
+          <h1 class="site-title">Pitty Games</h1>
+          <p class="site-tagline">Daily challenges for Panthers</p>
+        </div>
+
+        <nav class="header-auth" aria-label="Account">
+          <button type="button" class="btn btn--ghost" data-action="login">
+            Log in
+          </button>
+          <button type="button" class="btn btn--solid" data-action="signup">
+            Sign up
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="games" class="main" tabindex="-1">
+      <h2 class="visually-hidden">Choose a game</h2>
+      <div class="card-grid" role="list">
+        <button
+          type="button"
+          class="game-card"
+          role="listitem"
+          data-game="grid"
+          aria-label="Open Grid (coming soon)"
+        >
+          <span class="game-card__icon" aria-hidden="true">▦</span>
+          <span class="game-card__title">Grid</span>
+          <span class="game-card__hint">Daily puzzle</span>
+        </button>
+        <button
+          type="button"
+          class="game-card"
+          role="listitem"
+          data-game="bingo"
+          aria-label="Open Bingo (coming soon)"
+        >
+          <span class="game-card__icon" aria-hidden="true">◎</span>
+          <span class="game-card__title">Bingo</span>
+          <span class="game-card__hint">Campus hunt</span>
+        </button>
+        <button
+          type="button"
+          class="game-card"
+          role="listitem"
+          data-game="wordle"
+          aria-label="Open Wordle (coming soon)"
+        >
+          <span class="game-card__icon" aria-hidden="true">W</span>
+          <span class="game-card__title">Wordle</span>
+          <span class="game-card__hint">Pitt vocabulary</span>
+        </button>
+        <button
+          type="button"
+          class="game-card"
+          role="listitem"
+          data-game="connections"
+          aria-label="Open Connections (coming soon)"
+        >
+          <span class="game-card__icon" aria-hidden="true">∞</span>
+          <span class="game-card__title">Connections</span>
+          <span class="game-card__hint">Group the links</span>
+        </button>
+      </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+        <section class="footer-block">
+          <h2 class="footer-heading">What are Pitty Games?</h2>
+          <p>
+            Pitty Games are your home for daily Pitt games. Test your knowledge
+            of students, the university, and the city through games like Grid,
+            Bingo, Wordle, Connections with new challenges every single day.
+          </p>
+        </section>
+        <section class="footer-block">
+          <h2 class="footer-heading">When do daily games reset?</h2>
+          <p>
+            Games reset every day at midnight, allowing you to play fresh set
+            of challenges every 24 hours.
+          </p>
+        </section>
+        <section class="footer-block">
+          <h2 class="footer-heading">Will new games be added?</h2>
+          <p>
+            Absolutely. Pitty Games are expanding with new daily game modes,
+            along with fresh challenges to keep things exciting.
+          </p>
+        </section>
+        <p class="footer-credit">
+          Created by Kolja Hribar in collaboration with Google Gemini and
+          Cursor
+        </p>
+      </div>
+    </footer>
+
+    <div
+      id="toast"
+      class="toast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      hidden
+    ></div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
