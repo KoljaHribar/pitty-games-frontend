@@ -1,23 +1,15 @@
-# Pitty Games (frontend)
+# Pitty Games (Frontend MVP)
 
-Static landing page for daily Pitt-themed games (Grid, Bingo, Wordle, Connections).
+Static landing page and frontend logic for daily Pitt-themed games.
+
+🎮 **Play the live version here:** [https://koljahribar.github.io/pitty-games-frontend/](https://koljahribar.github.io/pitty-games-frontend/)
 
 ## Files
 
 - `index.html` — layout, header, game cards, footer  
-- `style.css` — Pitt blue/gold styling and layout  
-- `app.js` — card and auth button toasts (“coming soon”)
+- `style.css` — Pitt blue/gold styling and responsive layout  
+- `app.js` — core game logic, mock data rendering, and localStorage persistence
 
-## Run locally
+## Deployment
 
-From this folder:
-
-```bash
-python3 -m http.server 8080
-```
-
-Open [http://localhost:8080](http://localhost:8080) (or `/index.html`).
-
-## Notes
-
-Game routes in `app.js` are placeholders (`/games/...`) until real pages exist.
+This site is automatically deployed via GitHub Pages. Any new commits pushed to the `main` (or `master`) branch will automatically rebuild and update the live website within a few minutes.
