@@ -31,12 +31,22 @@
         </div>
 
         <nav class="header-auth" aria-label="Account">
-          <button type="button" class="btn btn--ghost" data-action="login">
-            Log in
-          </button>
-          <button type="button" class="btn btn--solid" data-action="signup">
-            Sign up
-          </button>
+          <div class="header-auth__guest">
+            <button type="button" class="btn btn--ghost" data-action="login">
+              Log in
+            </button>
+            <button type="button" class="btn btn--solid" data-action="signup">
+              Sign up
+            </button>
+          </div>
+          <div class="header-auth__user" id="header-auth-user" hidden>
+            <button type="button" class="btn btn--ghost" data-action="profile">
+              Profile
+            </button>
+            <button type="button" class="btn btn--solid" data-action="logout">
+              Log out
+            </button>
+          </div>
         </nav>
       </div>
     </header>
@@ -131,6 +141,182 @@
       hidden
     ></div>
 
+    <div
+      id="auth-modal"
+      class="auth-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="auth-modal-title"
+      data-auth-mode="login"
+      hidden
+    >
+      <div
+        class="auth-modal__backdrop"
+        data-close-auth-modal
+        tabindex="-1"
+        aria-hidden="true"
+      ></div>
+      <div class="auth-modal__panel">
+        <div class="auth-modal__header">
+          <h2 id="auth-modal-title" class="auth-modal__title">Log in</h2>
+          <button
+            type="button"
+            class="auth-modal__close btn btn--ghost"
+            id="auth-modal-close"
+            aria-label="Close"
+            data-close-auth-modal
+          >
+            ×
+          </button>
+        </div>
+        <div class="auth-modal__body">
+          <label class="auth-modal__label" for="auth-email">Email</label>
+          <input
+            id="auth-email"
+            type="email"
+            name="email"
+            autocomplete="email"
+            class="auth-modal__input"
+            required
+          />
+          <label class="auth-modal__label" for="auth-password">Password</label>
+          <input
+            id="auth-password"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            class="auth-modal__input"
+            required
+          />
+          <div class="auth-modal__actions">
+            <button type="button" id="auth-sign-up" class="btn btn--ghost">
+              Sign Up
+            </button>
+            <button type="button" id="auth-log-in" class="btn btn--solid">
+              Log In
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="profile-modal"
+      class="profile-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profile-modal-title"
+      hidden
+    >
+      <div
+        class="profile-modal__backdrop"
+        data-close-profile-modal
+        tabindex="-1"
+        aria-hidden="true"
+      ></div>
+      <div class="profile-modal__panel">
+        <div class="profile-modal__header">
+          <h2 id="profile-modal-title" class="profile-modal__title">
+            Your profile
+          </h2>
+          <button
+            type="button"
+            class="profile-modal__close btn btn--ghost"
+            id="profile-modal-close"
+            aria-label="Close"
+            data-close-profile-modal
+          >
+            ×
+          </button>
+        </div>
+        <div class="profile-modal__body">
+          <div class="profile-modal__grid">
+            <div class="profile-modal__field">
+              <label class="profile-modal__label" for="profile-first-name"
+                >First name</label>
+              <input
+                id="profile-first-name"
+                type="text"
+                name="first_name"
+                autocomplete="given-name"
+                class="profile-modal__input"
+              />
+            </div>
+            <div class="profile-modal__field">
+              <label class="profile-modal__label" for="profile-last-name"
+                >Last name</label>
+              <input
+                id="profile-last-name"
+                type="text"
+                name="last_name"
+                autocomplete="family-name"
+                class="profile-modal__input"
+              />
+            </div>
+            <div class="profile-modal__field profile-modal__field--full">
+              <label class="profile-modal__label" for="profile-major"
+                >Major</label>
+              <input
+                id="profile-major"
+                type="text"
+                name="major"
+                class="profile-modal__input"
+              />
+            </div>
+            <div class="profile-modal__field profile-modal__field--full">
+              <label class="profile-modal__label" for="profile-year">Year</label>
+              <select id="profile-year" name="year" class="profile-modal__input profile-modal__select">
+                <option value="">Select year</option>
+                <option value="Freshman">Freshman</option>
+                <option value="Sophomore">Sophomore</option>
+                <option value="Junior">Junior</option>
+                <option value="Senior">Senior</option>
+                <option value="Grad">Grad</option>
+              </select>
+            </div>
+            <div class="profile-modal__field profile-modal__field--full">
+              <label class="profile-modal__label" for="profile-favorite-sport"
+                >Favorite sport</label>
+              <input
+                id="profile-favorite-sport"
+                type="text"
+                name="favorite_sport"
+                class="profile-modal__input"
+              />
+            </div>
+            <div class="profile-modal__field profile-modal__field--full">
+              <label class="profile-modal__label" for="profile-home-county"
+                >Home county</label>
+              <input
+                id="profile-home-county"
+                type="text"
+                name="home_county"
+                class="profile-modal__input"
+              />
+            </div>
+          </div>
+          <div class="profile-modal__checkbox-wrap">
+            <input
+              type="checkbox"
+              id="profile-opt-in-daily-puzzle"
+              name="is_opted_in"
+              class="profile-modal__checkbox"
+            />
+            <label
+              class="profile-modal__checkbox-label"
+              for="profile-opt-in-daily-puzzle"
+              >Opt-in to be a daily puzzle answer</label>
+          </div>
+          <div class="profile-modal__actions">
+            <button type="button" id="profile-save-btn" class="btn btn--solid">
+              Save profile
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="app.js" defer></script>
   </body>
 </html>

@@ -1,6 +1,27 @@
 (function () {
   "use strict";
 
+  const SUPABASE_URL = "https://ydbivwgowrzrkntiasef.supabase.co";
+  const SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkYml2d2dvd3J6cmtudGlhc2VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1NTE1OTQsImV4cCI6MjA5MjEyNzU5NH0.gfuxly4T4sEZKzZX2TaEe4x4so5ATK9whLBPnCLM4NA";
+
+  let supabase = null;
+  const supabaseGlobal = window.supabase;
+  if (
+    supabaseGlobal &&
+    typeof supabaseGlobal.createClient === "function"
+  ) {
+    try {
+      supabase = supabaseGlobal.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } catch (err) {
+      console.error("Supabase client failed to initialize:", err);
+    }
+  } else {
+    console.error(
+      "Supabase library not loaded. Check the script URL and network access."
+    );
+  }
+
   const ROUTES = {
     grid: "/games/grid",
     bingo: "/games/bingo",
@@ -16,7 +37,118 @@
   };
 
   const toastEl = document.getElementById("toast");
+  const authModalEl = document.getElementById("auth-modal");
+  const authEmailEl = document.getElementById("auth-email");
+  const authPasswordEl = document.getElementById("auth-password");
+  const authSignUpBtn = document.getElementById("auth-sign-up");
+  const authLogInBtn = document.getElementById("auth-log-in");
+  const headerGuestEl = document.querySelector(".header-auth__guest");
+  const headerUserEl = document.getElementById("header-auth-user");
+  const profileModalEl = document.getElementById("profile-modal");
+  const profileFirstNameEl = document.getElementById("profile-first-name");
+  const profileLastNameEl = document.getElementById("profile-last-name");
+  const profileMajorEl = document.getElementById("profile-major");
+  const profileYearEl = document.getElementById("profile-year");
+  const profileFavoriteSportEl = document.getElementById("profile-favorite-sport");
+  const profileHomeCountyEl = document.getElementById("profile-home-county");
+  const profileOptInEl = document.getElementById("profile-opt-in-daily-puzzle");
+  const profileSaveBtn = document.getElementById("profile-save-btn");
   let toastTimer = null;
+
+  const authModalTitleEl = document.getElementById("auth-modal-title");
+
+  /**
+   * @param {"login" | "signup"} mode
+   */
+  function showAuthModal(mode) {
+    const isLogin = mode === "login";
+    if (authModalEl) {
+      authModalEl.hidden = false;
+      authModalEl.setAttribute("data-auth-mode", isLogin ? "login" : "signup");
+    }
+    if (authModalTitleEl) {
+      authModalTitleEl.textContent = isLogin ? "Log in" : "Sign up";
+    }
+    if (authSignUpBtn) {
+      authSignUpBtn.hidden = isLogin;
+    }
+    if (authLogInBtn) {
+      authLogInBtn.hidden = !isLogin;
+    }
+    if (authPasswordEl) {
+      authPasswordEl.setAttribute(
+        "autocomplete",
+        isLogin ? "current-password" : "new-password"
+      );
+    }
+  }
+
+  function hideAuthModal() {
+    if (authModalEl) authModalEl.hidden = true;
+  }
+
+  function syncAccountNav(session) {
+    const loggedIn = !!(session && session.user);
+    if (headerGuestEl) headerGuestEl.hidden = loggedIn;
+    if (headerUserEl) headerUserEl.hidden = !loggedIn;
+  }
+
+  function hideProfileModal() {
+    if (profileModalEl) profileModalEl.hidden = true;
+  }
+
+  function clearProfileForm() {
+    if (profileFirstNameEl) profileFirstNameEl.value = "";
+    if (profileLastNameEl) profileLastNameEl.value = "";
+    if (profileMajorEl) profileMajorEl.value = "";
+    if (profileYearEl) profileYearEl.value = "";
+    if (profileFavoriteSportEl) profileFavoriteSportEl.value = "";
+    if (profileHomeCountyEl) profileHomeCountyEl.value = "";
+    if (profileOptInEl) profileOptInEl.checked = false;
+  }
+
+  function applyProfileRow(row) {
+    if (!row) {
+      clearProfileForm();
+      return;
+    }
+    if (profileFirstNameEl) profileFirstNameEl.value = row.first_name ?? "";
+    if (profileLastNameEl) profileLastNameEl.value = row.last_name ?? "";
+    if (profileMajorEl) profileMajorEl.value = row.major ?? "";
+    if (profileYearEl) profileYearEl.value = row.year ?? "";
+    if (profileFavoriteSportEl) {
+      profileFavoriteSportEl.value = row.favorite_sport ?? "";
+    }
+    if (profileHomeCountyEl) profileHomeCountyEl.value = row.home_county ?? "";
+    if (profileOptInEl) {
+      profileOptInEl.checked = !!row.is_opted_in;
+    }
+  }
+
+  async function showProfileModal() {
+    if (!profileModalEl) return;
+    profileModalEl.hidden = false;
+    if (!supabase) return;
+    const {
+      data: { user },
+      error: userErr,
+    } = await supabase.auth.getUser();
+    if (userErr || !user) {
+      clearProfileForm();
+      return;
+    }
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle();
+    if (error) {
+      console.error("Profile load:", error);
+      clearProfileForm();
+      return;
+    }
+    applyProfileRow(data);
+  }
 
   function showToast(message) {
     if (!toastEl) return;
@@ -59,10 +191,137 @@
     el.addEventListener("click", () => {
       const action = el.getAttribute("data-action");
       if (action === "login") {
-        showToast("Log in — coming soon");
+        showAuthModal("login");
       } else if (action === "signup") {
-        showToast("Sign up — coming soon");
+        showAuthModal("signup");
+      } else if (action === "profile") {
+        void showProfileModal();
+      } else if (action === "logout") {
+        if (!supabase) {
+          syncAccountNav(null);
+          return;
+        }
+        void (async () => {
+          const { error } = await supabase.auth.signOut();
+          if (error) {
+            alert(error.message);
+            const { data: sess } = await supabase.auth.getSession();
+            syncAccountNav(sess.session);
+          } else {
+            syncAccountNav(null);
+          }
+        })();
       }
     });
   });
+
+  if (supabase) {
+    supabase.auth.onAuthStateChange((_event, session) => {
+      syncAccountNav(session);
+      if (!session?.user && profileModalEl && !profileModalEl.hidden) {
+        hideProfileModal();
+      }
+    });
+    void supabase.auth.getSession().then(({ data: { session } }) => {
+      syncAccountNav(session);
+    });
+  }
+
+  document.querySelectorAll("[data-close-profile-modal]").forEach((el) => {
+    el.addEventListener("click", () => hideProfileModal());
+  });
+
+  document.querySelectorAll("[data-close-auth-modal]").forEach((el) => {
+    el.addEventListener("click", () => hideAuthModal());
+  });
+
+  if (authSignUpBtn) {
+    authSignUpBtn.addEventListener("click", async () => {
+      if (!supabase) {
+        alert(
+          "Sign up is unavailable because the auth library did not load. Check your connection or try another browser."
+        );
+        return;
+      }
+      const email = authEmailEl ? authEmailEl.value.trim() : "";
+      const password = authPasswordEl ? authPasswordEl.value : "";
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("Success! Check your email to confirm your account.");
+        if (data.session) {
+          const { data: sess } = await supabase.auth.getSession();
+          syncAccountNav(sess.session);
+        }
+      }
+    });
+  }
+
+  if (authLogInBtn) {
+    authLogInBtn.addEventListener("click", async () => {
+      if (!supabase) {
+        alert(
+          "Log in is unavailable because the auth library did not load. Check your connection or try another browser."
+        );
+        return;
+      }
+      const email = authEmailEl ? authEmailEl.value.trim() : "";
+      const password = authPasswordEl ? authPasswordEl.value : "";
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("Logged in successfully!");
+        hideAuthModal();
+        const { data: sess } = await supabase.auth.getSession();
+        syncAccountNav(sess.session);
+      }
+    });
+  }
+
+  if (profileSaveBtn) {
+    profileSaveBtn.addEventListener("click", async () => {
+      if (!supabase) {
+        alert(
+          "Profile save is unavailable because the auth library did not load."
+        );
+        return;
+      }
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError || !user) {
+        alert(userError ? userError.message : "You must be logged in to save.");
+        return;
+      }
+      const email = user.email ?? "";
+      const str = (el) => (el && el.value ? el.value.trim() : "");
+      const payload = {
+        id: user.id,
+        email,
+        first_name: str(profileFirstNameEl) || null,
+        last_name: str(profileLastNameEl) || null,
+        major: str(profileMajorEl) || null,
+        year: profileYearEl && profileYearEl.value ? profileYearEl.value : null,
+        favorite_sport: str(profileFavoriteSportEl) || null,
+        home_county: str(profileHomeCountyEl) || null,
+        is_opted_in: !!(profileOptInEl && profileOptInEl.checked),
+        updated_at: new Date().toISOString(),
+      };
+      const { error } = await supabase.from("profiles").upsert(payload, {
+        onConflict: "id",
+      });
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("Profile saved successfully.");
+        hideProfileModal();
+      }
+    });
+  }
 })();
