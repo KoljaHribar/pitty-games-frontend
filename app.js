@@ -23,14 +23,12 @@
   }
 
   const ROUTES = {
-    grid: "/games/grid",
     bingo: "/games/bingo",
     wordle: "/games/wordle",
     connections: "/games/connections",
   };
 
   const LABELS = {
-    grid: "Grid",
     bingo: "Bingo",
     wordle: "Wordle",
     connections: "Connections",

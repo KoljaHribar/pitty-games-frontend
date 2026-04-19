@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Guess Who — daily Pitty Games puzzle: guess the mystery student from clues."
+    />
+    <title>Guess Who — Pitty Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#guess-who-main">Skip to game</a>
+
+    <header class="site-header" role="banner">
+      <div class="header-top">
+        <div class="header-spacer" aria-hidden="true"></div>
+        <div class="header-brand">
+          <h1 class="site-title">Pitty Games</h1>
+          <p class="site-tagline">Daily challenges for Panthers</p>
+        </div>
+        <nav class="header-auth" aria-label="Game navigation">
+          <a href="index.html" class="btn btn--ghost">Hub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="guess-who-main" class="guess-who-main" tabindex="-1">
+      <div class="guess-who-back">
+        <a href="index.html" class="btn btn--solid">← Back</a>
+      </div>
+
+      <h2 class="guess-who-title">Guess Who</h2>
+      <p class="guess-who-lede">
+        Use the clues and guess the mystery student. You have six tries.
+      </p>
+
+      <p id="guess-who-error" class="guess-who-error" role="alert" hidden></p>
+
+      <section aria-labelledby="clues-heading">
+        <h3 id="clues-heading" class="guess-who-section-title">Clues</h3>
+        <div id="clue-container" class="guess-who-clues"></div>
+      </section>
+
+      <section aria-labelledby="guess-heading">
+        <h3 id="guess-heading" class="guess-who-section-title">Your guess</h3>
+        <div class="guess-who-search-wrap">
+          <label class="visually-hidden" for="guess-who-input"
+            >Search student by name</label>
+          <input
+            id="guess-who-input"
+            type="text"
+            class="guess-who-input"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Start typing a name…"
+          />
+          <ul
+            id="guess-who-autocomplete"
+            class="guess-who-dropdown"
+            role="listbox"
+            hidden
+          ></ul>
+        </div>
+        <div class="guess-who-actions">
+          <button type="button" id="guess-who-submit" class="btn btn--solid">
+            Guess
+          </button>
+        </div>
+      </section>
+
+      <section aria-labelledby="history-heading">
+        <h3 id="history-heading" class="guess-who-section-title">
+          Guess history
+        </h3>
+        <ul id="guess-who-history" class="guess-who-history"></ul>
+      </section>
+    </main>
+
+    <div
+      id="results-modal"
+      class="results-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="results-modal-title"
+      hidden
+    >
+      <div
+        class="results-modal__backdrop"
+        tabindex="-1"
+        aria-hidden="true"
+      ></div>
+      <div class="results-modal__panel">
+        <h2 id="results-modal-title" class="results-modal__title"></h2>
+        <p id="results-modal-target" class="results-modal__target"></p>
+        <div class="results-modal__actions">
+          <a href="index.html" class="btn btn--solid results-modal__home">
+            Back to home
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="guess-who.js" defer></script>
+  </body>
+</html>

@@ -799,3 +799,254 @@ body {
   width: 100%;
   justify-content: center;
 }
+
+/* Game card as navigation link */
+a.game-card.game-card--link {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.game-card.game-card--link:visited {
+  color: inherit;
+}
+
+/* Guess Who game page */
+.guess-who-main {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.75rem)
+    max(1rem, calc(var(--safe-right) + 0.75rem))
+    clamp(2rem, 5vw, 3rem)
+    max(1rem, calc(var(--safe-left) + 0.75rem));
+  flex: 1;
+}
+
+.guess-who-back {
+  margin-bottom: 1rem;
+}
+
+.guess-who-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--pitt-blue);
+}
+
+.guess-who-lede {
+  margin: 0 0 1.5rem;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.guess-who-section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pitt-blue);
+}
+
+.guess-who-clues {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 520px) {
+  .guess-who-clues {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.guess-who-clue-card {
+  background: var(--surface-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  box-shadow: 0 2px 0 rgba(0, 53, 148, 0.05);
+}
+
+.guess-who-clue-card__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  margin-bottom: 0.25rem;
+}
+
+.guess-who-clue-card__value {
+  font-weight: 600;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.guess-who-search-wrap {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.guess-who-input {
+  width: 100%;
+  font: inherit;
+  padding: 0.65rem 0.9rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  color: var(--ink);
+  min-height: 48px;
+}
+
+.guess-who-input:focus {
+  outline: none;
+  border-color: var(--pitt-blue);
+  box-shadow: 0 0 0 3px rgba(255, 184, 28, 0.35);
+}
+
+.guess-who-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 30;
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  max-height: 14rem;
+  overflow-y: auto;
+  background: var(--surface-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+}
+
+.guess-who-dropdown[hidden] {
+  display: none !important;
+}
+
+.guess-who-dropdown li {
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.guess-who-dropdown li:hover,
+.guess-who-dropdown li.is-active {
+  background: rgba(0, 53, 148, 0.08);
+}
+
+.guess-who-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+.guess-who-actions .btn--solid {
+  min-width: 7rem;
+}
+
+.guess-who-history {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  max-height: 11rem;
+  overflow-y: auto;
+}
+
+.guess-who-history li {
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.guess-who-history li:last-child {
+  border-bottom: 0;
+}
+
+.guess-who-error {
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(185, 28, 28, 0.08);
+  border: 1px solid rgba(185, 28, 28, 0.25);
+  color: #7f1d1d;
+  font-size: 0.9rem;
+}
+
+.guess-who-error[hidden] {
+  display: none !important;
+}
+
+.results-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.results-modal[hidden] {
+  display: none !important;
+}
+
+.results-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 31, 92, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.results-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 22rem;
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1.35rem 1.25rem 1.25rem;
+}
+
+.results-modal__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--pitt-blue);
+  line-height: 1.25;
+}
+
+.results-modal__target {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.results-modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.results-modal__actions .btn,
+.results-modal__actions .results-modal__home {
+  width: 100%;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.results-modal__home:visited {
+  color: var(--pitt-blue-dark);
+}
