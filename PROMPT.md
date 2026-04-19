@@ -57,3 +57,158 @@ remove all the code responsible for the logo in the top left corner of the page.
 ### 9 — Center title again
 
 put the title Pitty Games back to the center top of the website, like it was before.
+
+### 10 — Supabase authentication (CDN + modal)
+
+I need to integrate Supabase authentication into my existing frontend using the Supabase CDN. Please update my `index.html` and `app.js` with the following requirements, making sure NOT to delete any of my existing layout or game logic:
+
+1. In `index.html`: Add the Supabase CDN script `<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>` just before my `app.js` script tag.
+2. In `app.js`: At the very top of the file, initialize the Supabase client using `window.supabase.createClient()`. Use placeholder strings 'https://ydbivwgowrzrkntiasef.supabase.co ' and 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkYml2d2dvd3J6cmtudGlhc2VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1NTE1OTQsImV4cCI6MjA5MjEyNzU5NH0.gfuxly4T4sEZKzZX2TaEe4x4so5ATK9whLBPnCLM4NA' for now.
+3. In `index.html`: Ensure there is a basic Auth modal or section with inputs for 'email' and 'password', and two buttons: "Sign Up" and "Log In". Ensure they have clear IDs.
+4. In `app.js`: Add event listeners to the Sign Up and Log In buttons. 
+    - For Sign Up: Use `supabase.auth.signUp()`. If there's an error, show an alert with the error message. If successful, alert "Success! Check your email to confirm your account."
+    - For Log In: Use `supabase.auth.signInWithPassword()`. If there's an error, show an alert. If successful, alert "Logged in successfully!" and hide the Auth modal.
+
+Please implement this and ensure the new code blends seamlessly with my current setup.
+
+### 11 — How to test locally
+
+how to test this locally?
+
+### 12 — Auth buttons not responding (diagnostic)
+
+I tried to press log in and sign up buttons but nothing happened as of yet. is that because THere are bugs in the current code, or is it because i need to further set up the supabase
+
+### 13 — Safari: no button clicks work
+
+I inspected the page on safari, tried clicking a few buttons but really nothing appeared in conosle. its like the buttons dont do anything after clicking them. and it goes for all the buttons. even the game buttons, which previously said "coming soon" are now doing nothing
+
+### 14 — Fix Safari button / script issue
+
+Fix the bug of nothing happening when i click the buttons in safari
+
+### 15 — Auth modal: login vs signup only
+
+When a user clicks the log in button, a box like now should appear, but it shoudl only let them log in. currenlty there are two buttons for the box for the log in button and log in and sign in buttons for the sign up as well. make it so it makes sense when you click the sign up button to bo signing up and when clicking the log in button to only log in
+
+### 16 — Profile management system
+
+My Supabase authentication is working. Now I need a Profile management system. Please update my `index.html` and `app.js` with the following:
+
+1. UI Updates (`index.html`):
+- Add a "Profile" button to the navigation that is ONLY visible when the user is logged in.
+- Create a new "Profile Modal" (hidden by default) with input fields for: First Name, Last Name, School, Major, Year (dropdown: Freshman, Sophomore, Junior, Senior, Grad), favorite sport, home county and a checkbox for "Opt-in to be a daily puzzle answer".
+- Add a "Save Profile" button inside the modal.
+
+2. Logic Updates (`app.js`):
+- Listen for authentication state changes using `supabase.auth.onAuthStateChange()`. If a user is logged in, hide the Login/Signup buttons and show the Profile button + Logout button.
+- When the "Save Profile" button is clicked, gather the form data and the current user's ID (`supabase.auth.getUser()`).
+- Use `supabase.from('profiles').upsert()` to save the data to the 'profiles' table. Ensure the payload includes the user's `id`, `email`, and the form fields.
+- Alert the user on success or failure. 
+
+Ensure the styling matches my existing Pitt-themed design.
+
+### 17 — Log out + header visibility
+
+the log out button isnt logging out. fix the issue so that the profile and log in buttons appear only after the user logs in (when the user is logged in, sign up and log in buttons should disappear). whn the user clicks log out button, log in and sign in buttons appear again
+
+### 18 — Remove school from profile
+
+remove the school question on the profile part. Keep everything else the same, just no school
+
+### 19 — Profile columns: `is_opted_in` and `updated_at`
+
+this is what it said when i tried to input in the profile:
+Could not find the 'opt_in_daily_puzzle_answer' column of 'profiles' in the schema cache
+in my supabase i have a is_opted_in and updated_at columns. fix the issue so my next entry is correctly handled
+
+### 20 — Profile column `year` (not `school_year`)
+
+the problem is again:
+Could not find the 'school_year' column of 'profiles' in the schema cache
+Look at how its named in the actual database and fix the names you made:
+id
+uuid
+PRIMARY
+FOREIGN KEY
+NON-NULLABLE
+
+Edit
+
+email
+text
+NULLABLE
+
+Edit
+
+first_name
+text
+NULLABLE
+
+Edit
+
+last_name
+text
+NULLABLE
+
+Edit
+
+major
+text
+NULLABLE
+
+Edit
+
+year
+text
+NULLABLE
+
+Edit
+
+favorite_sport
+text
+NULLABLE
+
+Edit
+
+home_county
+text
+NULLABLE
+
+Edit
+
+is_opted_in
+bool
+NULLABLE
+
+Edit
+
+updated_at
+timestamptz
+NULLABLE
+
+Edit
+
+
+### 21 — Ten new profile columns + grouped UI
+
+I have added 10 new columns to my 'profiles' table in Supabase. I need to update my Profile UI to allow users to fill these out.
+
+1. UI Updates (`index.html`):
+Inside my existing Profile Modal, add input fields for the following new attributes. Group them logically (e.g., put academics together, campus life together) so the form isn't overwhelming. Use dropdowns where it makes sense (like for "Favorite Floor of Cathy" 1-40, or "Most Used Bus" 71A, 71B, 71C, 71D, 61A, 61B, 61C, 61D, 10A).
+- High School
+- Freshman Dorm
+- Campus Job
+- Favorite Floor of Cathy
+- Favorite Dining Option
+- Most Used Bus Number
+- Worst Professor Taken
+- Best Professor Taken
+- Frat/Sorority
+- Favorite Pitt Club
+
+2. Logic Updates (`app.js`):
+Update the "Save Profile" event listener. It needs to grab the values from all these new inputs and include them in the `supabase.from('profiles').upsert()` payload. 
+Make sure the keys in the JavaScript payload exactly match the database columns (snake_case): high_school, freshman_dorm, campus_job, favorite_floor_of_cathy, favorite_dining_option, most_used_bus_number, worst_professor_taken, best_professor_taken, frat_sorority, favorite_pitt_club.
+
+Ensure the modal is scrollable and looks good on mobile, maintaining the Pitt visual theme.
