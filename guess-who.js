@@ -5,6 +5,8 @@
   const SUPABASE_ANON_KEY =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkYml2d2dvd3J6cmtudGlhc2VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1NTE1OTQsImV4cCI6MjA5MjEyNzU5NH0.gfuxly4T4sEZKzZX2TaEe4x4so5ATK9whLBPnCLM4NA";
 
+  const GAME_TYPE = "guess_who";
+
   let supabase = null;
   const supabaseGlobal = window.supabase;
   if (
@@ -49,6 +51,10 @@
   const modalEl = document.getElementById("results-modal");
   const modalTitleEl = document.getElementById("results-modal-title");
   const modalTargetEl = document.getElementById("results-modal-target");
+  const modalStatsEl = document.getElementById("results-modal-stats");
+  const statsBarEl = document.getElementById("guess-who-stats");
+  const scoreNumEl = document.getElementById("guess-who-score");
+  const streakNumEl = document.getElementById("guess-who-streak");
 
   function localDateKey(d) {
     const y = d.getFullYear();
@@ -57,8 +63,18 @@
     return `${y}-${m}-${day}`;
   }
 
-  function storageKeyForDate(dateStr) {
-    return `pittyGuessWho_${dateStr}`;
+  /** @param {unknown} v */
+  function dateToYmd(v) {
+    if (v == null || v === "") return "";
+    if (typeof v === "string") return v.slice(0, 10);
+    if (v instanceof Date) return localDateKey(v);
+    return String(v).slice(0, 10);
+  }
+
+  /** @param {unknown} raw */
+  function normalizeGuessList(raw) {
+    if (!Array.isArray(raw)) return [];
+    return raw.filter((x) => typeof x === "string");
   }
 
   function showError(message) {
@@ -114,6 +130,11 @@
     }
   }
 
+  function clearHistoryUi() {
+    if (!historyEl) return;
+    historyEl.innerHTML = "";
+  }
+
   function appendHistory(guessText) {
     if (!historyEl) return;
     const li = document.createElement("li");
@@ -121,55 +142,109 @@
     historyEl.appendChild(li);
   }
 
-  function getPlayedState(todayStr) {
-    try {
-      const raw = localStorage.getItem(storageKeyForDate(todayStr));
-      if (!raw) return null;
-      const parsed = JSON.parse(raw);
-      if (!parsed || parsed.date !== todayStr) return null;
-      return parsed;
-    } catch {
-      return null;
-    }
-  }
-
-  function savePlayedState(todayStr, payload) {
-    try {
-      localStorage.setItem(
-        storageKeyForDate(todayStr),
-        JSON.stringify({ ...payload, date: todayStr })
-      );
-    } catch (e) {
-      console.warn("Could not save game state:", e);
-    }
+  /**
+   * @param {number} wins
+   * @param {number} streak
+   */
+  function updateStatsBar(wins, streak) {
+    if (scoreNumEl) scoreNumEl.textContent = String(wins);
+    if (streakNumEl) streakNumEl.textContent = String(streak);
+    if (statsBarEl) statsBarEl.hidden = false;
   }
 
   /**
    * @param {"win" | "loss"} outcome
    * @param {string} targetFullName
+   * @param {{ totalWins: number, currentStreak: number }} stats
    */
-  function showResultsModal(outcome, targetFullName) {
+  function showResultsModal(outcome, targetFullName, stats) {
     if (!modalEl || !modalTitleEl || !modalTargetEl) return;
     const win = outcome === "win";
     modalTitleEl.textContent = win
       ? "You won!"
       : "Nice try — better luck tomorrow.";
     modalTargetEl.textContent = `Today’s student: ${targetFullName}`;
+    if (modalStatsEl) {
+      modalStatsEl.innerHTML = `Score: <strong>${stats.totalWins}</strong> · Current streak: <strong>${stats.currentStreak}</strong>`;
+    }
     modalEl.hidden = false;
   }
 
-  function init() {
-    const todayStr = localDateKey(new Date());
-    const played = getPlayedState(todayStr);
+  /**
+   * @param {unknown} client
+   * @param {Record<string, unknown>} row
+   */
+  async function upsertGameStats(client, row) {
+    const payload = {
+      user_id: row.user_id,
+      game_type: row.game_type,
+      total_wins: row.total_wins,
+      current_streak: row.current_streak,
+      last_played_date: row.last_played_date,
+      today_status: row.today_status,
+      today_guesses: row.today_guesses,
+    };
+    const { error } = await client.from("user_game_stats").upsert(payload, {
+      onConflict: "user_id,game_type",
+    });
+    if (error) throw error;
+  }
 
-    /** @type {Record<string, unknown> | null} */
-    let targetProfile = null;
-    let targetFullName = "";
+  /**
+   * @param {unknown} client
+   * @param {string} userId
+   * @param {string} todayStr
+   */
+  async function ensureGuessWhoStats(client, userId, todayStr) {
+    const { data: existing, error: selErr } = await client
+      .from("user_game_stats")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("game_type", GAME_TYPE)
+      .maybeSingle();
 
-    if (played && played.outcome && played.targetName != null) {
-      showResultsModal(played.outcome, played.targetName);
+    if (selErr) throw selErr;
+
+    if (!existing) {
+      const insertRow = {
+        user_id: userId,
+        game_type: GAME_TYPE,
+        total_wins: 0,
+        current_streak: 0,
+        last_played_date: todayStr,
+        today_status: "in_progress",
+        today_guesses: [],
+      };
+      const { data: created, error: insErr } = await client
+        .from("user_game_stats")
+        .insert(insertRow)
+        .select("*")
+        .single();
+      if (insErr) throw insErr;
+      return created;
     }
 
+    const lastDay = dateToYmd(existing.last_played_date);
+    if (lastDay !== todayStr) {
+      const { data: updated, error: updErr } = await client
+        .from("user_game_stats")
+        .update({
+          today_status: "in_progress",
+          today_guesses: [],
+          last_played_date: todayStr,
+        })
+        .eq("user_id", userId)
+        .eq("game_type", GAME_TYPE)
+        .select("*")
+        .single();
+      if (updErr) throw updErr;
+      return updated;
+    }
+
+    return existing;
+  }
+
+  function init() {
     if (!supabase) {
       showError(
         "Could not connect to Supabase. Check your network and that the Supabase script loaded, then refresh."
@@ -178,15 +253,43 @@
       return;
     }
 
-    /** @type {{ id: string, first_name: string | null, last_name: string | null }[]} */
-    let allProfiles = [];
-    let incorrectGuesses = played
-      ? Number(played.incorrectGuesses) || 0
-      : 0;
-    let gameOver = !!played;
-
     void (async () => {
       hideError();
+      const todayStr = localDateKey(new Date());
+
+      const {
+        data: { user },
+        error: userErr,
+      } = await supabase.auth.getUser();
+      if (userErr || !user) {
+        showError(
+          "Log in on the Pitty Games hub to play Guess Who and save your progress."
+        );
+        if (submitBtn) submitBtn.disabled = true;
+        if (inputEl) inputEl.disabled = true;
+        return;
+      }
+
+      /** @type {Record<string, unknown> | null} */
+      let targetProfile = null;
+      let targetFullName = "";
+
+      /** @type {Record<string, unknown>} */
+      let gameStats;
+      try {
+        gameStats = await ensureGuessWhoStats(supabase, user.id, todayStr);
+      } catch (e) {
+        console.error(e);
+        showError("Could not load your game stats. Please try again later.");
+        if (submitBtn) submitBtn.disabled = true;
+        if (inputEl) inputEl.disabled = true;
+        return;
+      }
+
+      const totalWins = Number(gameStats.total_wins) || 0;
+      const currentStreak = Number(gameStats.current_streak) || 0;
+      updateStatsBar(totalWins, currentStreak);
+
       const { data: puzzleRow, error: puzzleErr } = await supabase
         .from("daily_puzzles")
         .select("target_profile_id")
@@ -233,17 +336,32 @@
         return;
       }
 
-      allProfiles = namesData || [];
+      const allProfiles = namesData || [];
 
-      if (played) {
-        incorrectGuesses = Number(played.incorrectGuesses) || 0;
+      const todayStatus = String(gameStats.today_status || "in_progress");
+      const wrongGuesses = normalizeGuessList(gameStats.today_guesses);
+
+      let incorrectGuesses = wrongGuesses.length;
+      let gameOver = todayStatus === "won" || todayStatus === "lost";
+
+      if (todayStatus === "won" || todayStatus === "lost") {
+        clearHistoryUi();
+        wrongGuesses.forEach((g) => appendHistory(g));
         renderClues(targetProfile, incorrectGuesses);
         if (submitBtn) submitBtn.disabled = true;
-        if (inputEl) inputEl.disabled = true;
+        if (inputEl) {
+          inputEl.disabled = true;
+          inputEl.value = "";
+        }
+        showResultsModal(todayStatus === "won" ? "win" : "loss", targetFullName, {
+          totalWins,
+          currentStreak,
+        });
         return;
       }
 
-      incorrectGuesses = 0;
+      clearHistoryUi();
+      wrongGuesses.forEach((g) => appendHistory(g));
       renderClues(targetProfile, incorrectGuesses);
 
       /** @type {number} */
@@ -344,7 +462,7 @@
         }
       });
 
-      function endGame(outcome) {
+      async function endGame(outcome) {
         gameOver = true;
         if (submitBtn) submitBtn.disabled = true;
         if (inputEl) {
@@ -352,15 +470,39 @@
           inputEl.value = "";
         }
         closeDropdown();
-        showResultsModal(outcome, targetFullName);
-        savePlayedState(todayStr, {
-          outcome,
-          targetName: targetFullName,
-          incorrectGuesses,
+
+        const wins = Number(gameStats.total_wins) || 0;
+        const streak = Number(gameStats.current_streak) || 0;
+
+        if (outcome === "win") {
+          gameStats.total_wins = wins + 1;
+          gameStats.current_streak = streak + 1;
+          gameStats.today_status = "won";
+        } else {
+          gameStats.current_streak = 0;
+          gameStats.today_status = "lost";
+        }
+        gameStats.last_played_date = todayStr;
+
+        try {
+          await upsertGameStats(supabase, gameStats);
+        } catch (e) {
+          console.error(e);
+          showError("Could not save your result. Check your connection.");
+        }
+
+        updateStatsBar(
+          Number(gameStats.total_wins) || 0,
+          Number(gameStats.current_streak) || 0
+        );
+
+        showResultsModal(outcome, targetFullName, {
+          totalWins: Number(gameStats.total_wins) || 0,
+          currentStreak: Number(gameStats.current_streak) || 0,
         });
       }
 
-      function onGuess() {
+      async function onGuess() {
         if (gameOver || !targetProfile || !inputEl) return;
         const guessRaw = inputEl.value;
         const guessNorm = normName(guessRaw);
@@ -368,18 +510,31 @@
 
         const targetNorm = normName(targetFullName);
         if (guessNorm === targetNorm) {
-          endGame("win");
+          await endGame("win");
           return;
         }
 
-        appendHistory(guessRaw.trim());
+        const trimmed = guessRaw.trim();
+        appendHistory(trimmed);
         inputEl.value = "";
         closeDropdown();
 
-        incorrectGuesses += 1;
+        const nextGuesses = normalizeGuessList(gameStats.today_guesses).concat(
+          trimmed
+        );
+        gameStats.today_guesses = nextGuesses;
+        incorrectGuesses = nextGuesses.length;
+
+        try {
+          await upsertGameStats(supabase, gameStats);
+        } catch (e) {
+          console.error(e);
+          showError("Could not save your guess. Check your connection.");
+        }
+
         if (incorrectGuesses >= CLUE_ORDER.length) {
           renderClues(targetProfile, incorrectGuesses - 1);
-          endGame("loss");
+          await endGame("loss");
           return;
         }
 
@@ -387,7 +542,9 @@
       }
 
       if (submitBtn) {
-        submitBtn.addEventListener("click", onGuess);
+        submitBtn.addEventListener("click", () => {
+          void onGuess();
+        });
       }
     })();
   }

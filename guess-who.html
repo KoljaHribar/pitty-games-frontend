@@ -46,6 +46,16 @@
         Use the clues and guess the mystery student. You have six tries.
       </p>
 
+      <p id="guess-who-stats" class="guess-who-stats" hidden>
+        <span
+          >Score:
+          <strong id="guess-who-score" class="guess-who-stats__num">0</strong></span>
+        <span class="guess-who-stats__sep" aria-hidden="true">·</span>
+        <span
+          >Streak:
+          <strong id="guess-who-streak" class="guess-who-stats__num">0</strong></span>
+      </p>
+
       <p id="guess-who-error" class="guess-who-error" role="alert" hidden></p>
 
       <section aria-labelledby="clues-heading">
@@ -104,6 +114,7 @@
       <div class="results-modal__panel">
         <h2 id="results-modal-title" class="results-modal__title"></h2>
         <p id="results-modal-target" class="results-modal__target"></p>
+        <p id="results-modal-stats" class="results-modal__stats"></p>
         <div class="results-modal__actions">
           <a href="index.html" class="btn btn--solid results-modal__home">
             Back to home

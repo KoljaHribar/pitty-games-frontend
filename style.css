@@ -409,6 +409,19 @@ body {
   font-weight: 500;
 }
 
+.game-card__score {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--pitt-blue);
+  letter-spacing: 0.02em;
+}
+
+.game-card__score[hidden] {
+  display: none !important;
+}
+
 .site-footer {
   margin-top: auto;
   background: var(--pitt-blue-dark);
@@ -835,9 +848,30 @@ a.game-card.game-card--link:visited {
 }
 
 .guess-who-lede {
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.75rem;
   color: var(--ink-muted);
   font-size: 0.95rem;
+}
+
+.guess-who-stats {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.guess-who-stats__num {
+  color: var(--pitt-blue);
+  font-weight: 700;
+}
+
+.guess-who-stats__sep {
+  margin: 0 0.4rem;
+  opacity: 0.55;
+}
+
+.guess-who-stats[hidden] {
+  display: none !important;
 }
 
 .guess-who-section-title {
@@ -1029,9 +1063,25 @@ a.game-card.game-card--link:visited {
 }
 
 .results-modal__target {
-  margin: 0 0 1rem;
+  margin: 0 0 0.65rem;
   font-size: 1rem;
   color: var(--ink);
+}
+
+.results-modal__stats {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink-muted);
+  background: rgba(0, 53, 148, 0.06);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.results-modal__stats strong {
+  color: var(--pitt-blue);
+  font-weight: 700;
 }
 
 .results-modal__actions {

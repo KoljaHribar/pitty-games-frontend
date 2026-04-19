@@ -109,6 +109,32 @@
     if (headerUserEl) headerUserEl.hidden = !loggedIn;
   }
 
+  const GUESS_WHO_GAME_TYPE = "guess_who";
+
+  async function syncGuessWhoHubScore(session) {
+    const el = document.getElementById("guess-who-hub-score");
+    if (!el) return;
+    if (!supabase || !session?.user) {
+      el.hidden = true;
+      el.textContent = "";
+      return;
+    }
+    const { data, error } = await supabase
+      .from("user_game_stats")
+      .select("total_wins")
+      .eq("user_id", session.user.id)
+      .eq("game_type", GUESS_WHO_GAME_TYPE)
+      .maybeSingle();
+    if (error) {
+      console.error("Guess Who hub score:", error);
+      el.hidden = true;
+      return;
+    }
+    const wins = Number(data?.total_wins) || 0;
+    el.textContent = `Score: ${wins}`;
+    el.hidden = false;
+  }
+
   function hideProfileModal() {
     if (profileModalEl) profileModalEl.hidden = true;
   }
@@ -272,12 +298,14 @@
   if (supabase) {
     supabase.auth.onAuthStateChange((_event, session) => {
       syncAccountNav(session);
+      void syncGuessWhoHubScore(session);
       if (!session?.user && profileModalEl && !profileModalEl.hidden) {
         hideProfileModal();
       }
     });
     void supabase.auth.getSession().then(({ data: { session } }) => {
       syncAccountNav(session);
+      void syncGuessWhoHubScore(session);
     });
   }
 
