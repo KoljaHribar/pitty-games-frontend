@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Impostor — daily Pitty Games puzzle: find the student who does not share the group’s connection."
+    />
+    <title>Impostor — Pitty Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#impostor-main">Skip to game</a>
+
+    <header class="site-header" role="banner">
+      <div class="header-top">
+        <div class="header-spacer" aria-hidden="true"></div>
+        <div class="header-brand">
+          <h1 class="site-title">Pitty Games</h1>
+          <p class="site-tagline">Daily challenges for Panthers</p>
+        </div>
+        <nav class="header-auth" aria-label="Game navigation">
+          <a href="index.html" class="btn btn--ghost">Hub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="impostor-main" class="impostor-main" tabindex="-1">
+      <div class="impostor-back">
+        <a href="index.html" class="btn btn--solid">← Back</a>
+      </div>
+
+      <h2 class="impostor-title">Impostor</h2>
+      <p class="impostor-lede">
+        Find the Impostor: 4 of these students share something in common. 1 does
+        not. You have 1 guess.
+      </p>
+
+      <p id="impostor-stats" class="impostor-stats" hidden>
+        <span
+          >Score:
+          <strong id="impostor-score" class="impostor-stats__num">0</strong></span>
+        <span class="impostor-stats__sep" aria-hidden="true">·</span>
+        <span
+          >Streak:
+          <strong id="impostor-streak" class="impostor-stats__num">0</strong></span>
+      </p>
+
+      <p id="impostor-error" class="guess-who-error" role="alert" hidden></p>
+
+      <section aria-labelledby="impostor-choices-heading">
+        <h3 id="impostor-choices-heading" class="guess-who-section-title">
+          Pick the impostor
+        </h3>
+        <div id="impostor-choices" class="impostor-choices"></div>
+      </section>
+    </main>
+
+    <div
+      id="results-modal"
+      class="results-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="results-modal-title"
+      hidden
+    >
+      <div
+        class="results-modal__backdrop"
+        tabindex="-1"
+        aria-hidden="true"
+      ></div>
+      <div class="results-modal__panel">
+        <h2 id="results-modal-title" class="results-modal__title"></h2>
+        <p id="results-modal-target" class="results-modal__target"></p>
+        <p
+          id="results-modal-explanation"
+          class="results-modal__explanation"
+        ></p>
+        <p id="results-modal-stats" class="results-modal__stats"></p>
+        <div class="results-modal__actions">
+          <a href="index.html" class="btn btn--solid results-modal__home">
+            Back to home
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="impostor.js" defer></script>
+  </body>
+</html>

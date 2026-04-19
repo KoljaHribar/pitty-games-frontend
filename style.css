@@ -1020,6 +1020,99 @@ a.game-card.game-card--link:visited {
   display: none !important;
 }
 
+/* Impostor game page */
+.impostor-main {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.75rem)
+    max(1rem, calc(var(--safe-right) + 0.75rem))
+    clamp(2rem, 5vw, 3rem)
+    max(1rem, calc(var(--safe-left) + 0.75rem));
+  flex: 1;
+}
+
+.impostor-back {
+  margin-bottom: 1rem;
+}
+
+.impostor-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--pitt-blue);
+}
+
+.impostor-lede {
+  margin: 0 0 1rem;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.impostor-stats {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.impostor-stats__num {
+  color: var(--pitt-blue);
+  font-weight: 700;
+}
+
+.impostor-stats__sep {
+  margin: 0 0.4rem;
+  opacity: 0.55;
+}
+
+.impostor-stats[hidden] {
+  display: none !important;
+}
+
+.impostor-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.impostor-choice {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 1.15rem;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 0 rgba(0, 53, 148, 0.05);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.impostor-choice:hover:not(:disabled) {
+  border-color: var(--pitt-blue);
+  background: rgba(0, 53, 148, 0.04);
+}
+
+.impostor-choice:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.impostor-choice:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .results-modal {
   position: fixed;
   inset: 0;
@@ -1066,6 +1159,13 @@ a.game-card.game-card--link:visited {
   margin: 0 0 0.65rem;
   font-size: 1rem;
   color: var(--ink);
+}
+
+.results-modal__explanation {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink-muted);
 }
 
 .results-modal__stats {

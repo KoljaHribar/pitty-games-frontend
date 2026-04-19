@@ -109,55 +109,113 @@
     if (headerUserEl) headerUserEl.hidden = !loggedIn;
   }
 
-  const GUESS_WHO_GAME_TYPE = "guess_who";
-  const WORDLE_GAME_TYPE = "wordle";
+  /**
+   * Hub scores load from Supabase `user_game_stats`, not localStorage.
+   * Each entry: stable id + CSS fallback so the badge still resolves if ids drift.
+   * @type {{ gameType: string, elId: string, fallbackSelector: string }[]}
+   */
+  const GAME_HUB_ENTRIES = [
+    {
+      gameType: "guess_who",
+      elId: "guess-who-hub-score",
+      fallbackSelector:
+        'a.game-card--link[href$="guess-who.html"] .game-card__score',
+    },
+    {
+      gameType: "impostor",
+      elId: "impostor-hub-score",
+      fallbackSelector:
+        'a.game-card--link[href$="impostor.html"] .game-card__score',
+    },
+    {
+      gameType: "wordle",
+      elId: "wordle-hub-score",
+      fallbackSelector:
+        'a.game-card--link[href$="wordle.html"] .game-card__score',
+    },
+    {
+      gameType: "connections",
+      elId: "connections-hub-score",
+      fallbackSelector:
+        'button.game-card[data-game="connections"] .game-card__score',
+    },
+  ];
 
-  async function syncGuessWhoHubScore(session) {
-    const el = document.getElementById("guess-who-hub-score");
-    if (!el) return;
-    if (!supabase || !session?.user) {
-      el.hidden = true;
-      el.textContent = "";
-      return;
+  /**
+   * @param {unknown} raw
+   */
+  function hubWinsFromRow(raw) {
+    const n = Number(raw);
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  /**
+   * @param {{ elId: string, fallbackSelector: string }} entry
+   * @returns {HTMLElement | null}
+   */
+  function resolveHubScoreEl(entry) {
+    const byId = document.getElementById(entry.elId);
+    if (byId) return byId;
+    try {
+      return document.querySelector(entry.fallbackSelector);
+    } catch {
+      return null;
     }
-    const { data, error } = await supabase
-      .from("user_game_stats")
-      .select("total_wins")
-      .eq("user_id", session.user.id)
-      .eq("game_type", GUESS_WHO_GAME_TYPE)
-      .maybeSingle();
-    if (error) {
-      console.error("Guess Who hub score:", error);
-      el.hidden = true;
-      return;
-    }
-    const wins = Number(data?.total_wins) || 0;
+  }
+
+  /**
+   * @param {HTMLElement} el
+   * @param {number} wins
+   */
+  function showHubScore(el, wins) {
     el.textContent = `Score: ${wins}`;
+    el.removeAttribute("hidden");
     el.hidden = false;
   }
 
-  async function syncWordleHubScore(session) {
-    const el = document.getElementById("wordle-hub-score");
+  /** @param {HTMLElement} el */
+  function hideHubScore(el) {
+    el.textContent = "";
+    el.setAttribute("hidden", "");
+    el.hidden = true;
+  }
+
+  /**
+   * @param {{ user: { id: string } } | null} session
+   * @param {{ gameType: string, elId: string, fallbackSelector: string }} entry
+   */
+  async function syncOneGameHubScore(session, entry) {
+    const el = resolveHubScoreEl(entry);
     if (!el) return;
     if (!supabase || !session?.user) {
-      el.hidden = true;
-      el.textContent = "";
+      hideHubScore(el);
       return;
     }
-    const { data, error } = await supabase
-      .from("user_game_stats")
-      .select("total_wins")
-      .eq("user_id", session.user.id)
-      .eq("game_type", WORDLE_GAME_TYPE)
-      .maybeSingle();
-    if (error) {
-      console.error("Wordle hub score:", error);
-      el.hidden = true;
-      return;
+    showHubScore(el, 0);
+    try {
+      const { data, error } = await supabase
+        .from("user_game_stats")
+        .select("total_wins")
+        .eq("user_id", session.user.id)
+        .eq("game_type", entry.gameType)
+        .maybeSingle();
+      if (error) {
+        console.error(`Hub score (${entry.gameType}):`, error);
+        return;
+      }
+      showHubScore(el, hubWinsFromRow(data?.total_wins));
+    } catch (e) {
+      console.error(`Hub score (${entry.gameType}):`, e);
     }
-    const wins = Number(data?.total_wins) || 0;
-    el.textContent = `Score: ${wins}`;
-    el.hidden = false;
+  }
+
+  /**
+   * @param {{ user: { id: string } } | null} session
+   */
+  async function syncAllGameHubScores(session) {
+    await Promise.all(
+      GAME_HUB_ENTRIES.map((entry) => syncOneGameHubScore(session, entry))
+    );
   }
 
   function hideProfileModal() {
@@ -323,16 +381,14 @@
   if (supabase) {
     supabase.auth.onAuthStateChange((_event, session) => {
       syncAccountNav(session);
-      void syncGuessWhoHubScore(session);
-      void syncWordleHubScore(session);
+      void syncAllGameHubScores(session);
       if (!session?.user && profileModalEl && !profileModalEl.hidden) {
         hideProfileModal();
       }
     });
     void supabase.auth.getSession().then(({ data: { session } }) => {
       syncAccountNav(session);
-      void syncGuessWhoHubScore(session);
-      void syncWordleHubScore(session);
+      void syncAllGameHubScores(session);
     });
   }
 
@@ -362,6 +418,7 @@
         if (data.session) {
           const { data: sess } = await supabase.auth.getSession();
           syncAccountNav(sess.session);
+          void syncAllGameHubScores(sess.session);
         }
       }
     });
@@ -388,6 +445,7 @@
         hideAuthModal();
         const { data: sess } = await supabase.auth.getSession();
         syncAccountNav(sess.session);
+        void syncAllGameHubScores(sess.session);
       }
     });
   }

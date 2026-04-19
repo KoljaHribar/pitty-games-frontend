@@ -212,3 +212,59 @@ Update the "Save Profile" event listener. It needs to grab the values from all t
 Make sure the keys in the JavaScript payload exactly match the database columns (snake_case): high_school, freshman_dorm, campus_job, favorite_floor_of_cathy, favorite_dining_option, most_used_bus_number, worst_professor_taken, best_professor_taken, frat_sorority, favorite_pitt_club.
 
 Ensure the modal is scrollable and looks good on mobile, maintaining the Pitt visual theme.
+
+---
+
+### 22 — Guess Who: hub card, standalone page, Supabase game loop (initial spec)
+
+Context: daily puzzle web app for university students using Vanilla JavaScript, HTML, CSS, and the Supabase JS CDN. Database: `profiles` (id, first_name, last_name, major, year, high_school, freshman_dorm, campus_job, favorite_floor_of_cathy, favorite_dining_option, most_used_bus_number, worst_professor_taken, best_professor_taken, frat_sorority, favorite_pitt_club, …) and `daily_puzzles` (id, puzzle_date, target_profile_id).
+
+**Task 1 — `index.html`:** Find the existing “Grid” game card; rename it to “Guess Who”; change its button/link to navigate to `guess-who.html` instead of a “Coming Soon” toast.
+
+**Task 2 — `guess-who.html`:** New file with same overall header/navigation styling as `index.html`; Supabase CDN in `<head>`; main UI: Back to `index.html`, clue container (cards per revealed clue), autocomplete name search with absolute-positioned dropdown `<ul>`, Guess button, guess history list, hidden-by-default results modal (win/loss, target full name, “Copy Results” to clipboard emojis); script `guess-who.js` at bottom.
+
+**Task 3 — `guess-who.js`:** Initialize Supabase (placeholder URL/key acceptable initially). Clue order (6 guesses): `year`, `major`, `freshman_dorm`, `favorite_dining_option`, `favorite_pitt_club`, `high_school`. On load: `localStorage` check if already played today → show results modal; fetch today’s `daily_puzzles` (local date), target profile, all profiles’ names for autocomplete. Reveal first clue immediately; wrong guess → history, clear input, next clue; correct → win modal + `localStorage`; six wrong → loss modal + `localStorage`.
+
+### 23 — Guess Who: Supabase credentials + guess input focus
+
+The game showed “Supabase is not configured” and the guess field would not take focus/cursor. Fix by using the same `SUPABASE_URL` and `SUPABASE_ANON_KEY` as in `app.js` (lines 4–7). Do not disable the search input when only Supabase init fails (so the field is not stuck unfocusable); keep the Guess button disabled if appropriate.
+
+### 24 — Guess Who: results modal — home navigation and optional dismiss
+
+After a win, users could not return to the hub; only “Copy results” existed. Replace “Copy results” with a **Back to home** control to `index.html`. Add an **×** in the corner (and backdrop/Escape dismiss) so users can close the modal and still see the Guess Who page (clues, history) after finishing.
+
+### 25 — Guess Who: results modal — home only (remove ×)
+
+Remove the × close and any dismiss-by-backdrop or Escape behavior. The only way out of the win/loss overlay should be **Back to home** (link to `index.html`).
+
+### 26 — Guess Who: `user_game_stats` replaces `localStorage` (multi-device)
+
+New Supabase table `user_game_stats`: `user_id`, `game_type`, `total_wins`, `current_streak`, `last_played_date`, `today_status`, `today_guesses` (jsonb). **Remove all Guess Who `localStorage` usage.**
+
+**On load (`guess-who.js`):** Require logged-in user (`getUser`). Fetch row where `game_type` = `'guess_who'`. If no row: insert defaults (`total_wins` 0, `current_streak` 0, `today_status` `'in_progress'`, `today_guesses` `[]`, `last_played_date` today). If row exists and `last_played_date` ≠ today: reset `today_status` to `'in_progress'`, `today_guesses` to `[]`, set `last_played_date` to today (preserve wins/streak). If `today_status` is `'won'` or `'lost'`: show end-game modal immediately. If `'in_progress'`: restore UI from `today_guesses` (array of wrong guess strings) so the user can resume.
+
+**During play:** After each guess, `upsert` updated `today_guesses`. On **win:** increment `total_wins` and `current_streak`, set `today_status` `'won'`, persist. On **loss** (six wrong): set `current_streak` to 0, `today_status` `'lost'`, persist.
+
+**UI:** On `guess-who.html`, show **Score** (`total_wins`) and **Streak**; in the results modal, show updated score and streak. On **`index.html`** Guess Who card (if possible), show the user’s Guess Who score when logged in (`app.js` fetching the same table).
+
+**Database:** `upsert` with `onConflict` on `(user_id, game_type)` requires a matching unique constraint in Supabase.
+
+### 22 — Wordle clone (Vanilla JS page + Supabase)
+
+Build a **Wordle**-style game as a **standalone** `wordle.html` / `wordle.js` page (Vanilla JS, HTML, CSS), reusing the site header and `style.css`, with Supabase CDN.
+
+**Hub (`index.html`):** Point the Wordle game card at `wordle.html` (same pattern as the Guess Who link card).
+
+**UI (`wordle.html`):** Back to hub; subtitle for target + letter count; empty **grid** and **on-screen keyboard** (QWERTY + ENTER + BACKSPACE); **results modal** matching `guess-who.html` (score, streak, revealed name); link `wordle.js` at the bottom.
+
+**Data / logic (`wordle.js`):** Mirror Guess Who’s Supabase flow: `daily_puzzles` (today’s row) → `profiles` for the target; `user_game_stats` with `game_type = 'wordle'`, same **ensure / upsert** pattern as Guess Who (new day resets `today_status` / `today_guesses`). Fetch stats; if `today_status` is `in_progress`, restore **`today_guesses`** into the grid with correct tile colors.
+
+**Gameplay:** Exactly **5** rows; columns = target word length. Target word from profile: **clean** (remove spaces/hyphens, uppercase). Physical + virtual keyboard; Enter submits only when guess length matches; **no dictionary check**. Tiles: green / yellow / gray with **correct Wordle duplicate-letter behavior**; keyboard keys reflect best-known state per letter. On each guess, upsert `today_guesses`. **Win** = exact match → `today_status = 'won'`, increment wins and streak, show modal. **Loss** after 5 misses → `lost`, streak 0, modal.
+
+*(Original spec also asked for alternating first vs last name by calendar day; product direction later fixed the game to **last names only** — see prompt 23.)*
+
+### 23 — Wordle hub score + last names only
+
+1. Show **Score** on the **Wordle** card on the home screen **the same way** as Guess Who (e.g. `Score: …` using `user_game_stats` for `game_type = 'wordle'`).
+2. **Fix** Wordle so the answer is **only** the user’s **last name** (no first-name / day-of-month rule).
+3. Update the **game intro** (and related copy) on the Wordle page to match last-name play.
