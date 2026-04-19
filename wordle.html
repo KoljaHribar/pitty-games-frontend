@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Wordle — daily Pitty Games puzzle: guess the mystery student’s last name."
+    />
+    <title>Wordle — Pitty Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#wordle-main">Skip to game</a>
+
+    <header class="site-header" role="banner">
+      <div class="header-top">
+        <div class="header-spacer" aria-hidden="true"></div>
+        <div class="header-brand">
+          <h1 class="site-title">Pitty Games</h1>
+          <p class="site-tagline">Daily challenges for Panthers</p>
+        </div>
+        <nav class="header-auth" aria-label="Game navigation">
+          <a href="index.html" class="btn btn--ghost">Hub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="wordle-main" class="wordle-main" tabindex="-1">
+      <div class="wordle-back">
+        <a href="index.html" class="btn btn--solid">← Back</a>
+      </div>
+
+      <h2 class="wordle-title">Wordle</h2>
+      <p class="wordle-lede">
+        Guess today’s mystery student’s last name in five tries. Green is
+        exact, yellow is elsewhere in the word, gray is not in the word.
+      </p>
+
+      <p id="wordle-target-line" class="wordle-target-line">
+        <span id="wordle-target-kind">Target: —</span>
+        <span class="wordle-target-line__sep" aria-hidden="true">·</span>
+        <span id="wordle-length-line">Length: — letters</span>
+      </p>
+
+      <p id="wordle-stats" class="wordle-stats" hidden>
+        <span
+          >Score:
+          <strong id="wordle-score" class="wordle-stats__num">0</strong></span>
+        <span class="wordle-stats__sep" aria-hidden="true">·</span>
+        <span
+          >Streak:
+          <strong id="wordle-streak" class="wordle-stats__num">0</strong></span>
+      </p>
+
+      <p id="wordle-error" class="guess-who-error" role="alert" hidden></p>
+
+      <div
+        id="wordle-grid"
+        class="wordle-grid"
+        role="grid"
+        aria-label="Guess grid"
+      ></div>
+
+      <div
+        id="wordle-keyboard"
+        class="wordle-keyboard"
+        aria-label="On-screen keyboard"
+      ></div>
+    </main>
+
+    <div
+      id="results-modal"
+      class="results-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="results-modal-title"
+      hidden
+    >
+      <div
+        class="results-modal__backdrop"
+        tabindex="-1"
+        aria-hidden="true"
+      ></div>
+      <div class="results-modal__panel">
+        <h2 id="results-modal-title" class="results-modal__title"></h2>
+        <p id="results-modal-target" class="results-modal__target"></p>
+        <p id="results-modal-stats" class="results-modal__stats"></p>
+        <div class="results-modal__actions">
+          <a href="index.html" class="btn btn--solid results-modal__home">
+            Back to home
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="wordle.js" defer></script>
+  </body>
+</html>
