@@ -52,6 +52,24 @@
   const profileFavoriteSportEl = document.getElementById("profile-favorite-sport");
   const profileHomeCountyEl = document.getElementById("profile-home-county");
   const profileOptInEl = document.getElementById("profile-opt-in-daily-puzzle");
+  const profileHighSchoolEl = document.getElementById("profile-high-school");
+  const profileFreshmanDormEl = document.getElementById("profile-freshman-dorm");
+  const profileCampusJobEl = document.getElementById("profile-campus-job");
+  const profileFavoriteFloorCathyEl = document.getElementById(
+    "profile-favorite-floor-cathy"
+  );
+  const profileFavoriteDiningEl = document.getElementById(
+    "profile-favorite-dining"
+  );
+  const profileMostUsedBusEl = document.getElementById("profile-most-used-bus");
+  const profileWorstProfessorEl = document.getElementById(
+    "profile-worst-professor"
+  );
+  const profileBestProfessorEl = document.getElementById("profile-best-professor");
+  const profileFratSororityEl = document.getElementById("profile-frat-sorority");
+  const profileFavoritePittClubEl = document.getElementById(
+    "profile-favorite-pitt-club"
+  );
   const profileSaveBtn = document.getElementById("profile-save-btn");
   let toastTimer = null;
 
@@ -104,6 +122,16 @@
     if (profileYearEl) profileYearEl.value = "";
     if (profileFavoriteSportEl) profileFavoriteSportEl.value = "";
     if (profileHomeCountyEl) profileHomeCountyEl.value = "";
+    if (profileHighSchoolEl) profileHighSchoolEl.value = "";
+    if (profileFreshmanDormEl) profileFreshmanDormEl.value = "";
+    if (profileCampusJobEl) profileCampusJobEl.value = "";
+    if (profileFavoriteFloorCathyEl) profileFavoriteFloorCathyEl.value = "";
+    if (profileFavoriteDiningEl) profileFavoriteDiningEl.value = "";
+    if (profileMostUsedBusEl) profileMostUsedBusEl.value = "";
+    if (profileWorstProfessorEl) profileWorstProfessorEl.value = "";
+    if (profileBestProfessorEl) profileBestProfessorEl.value = "";
+    if (profileFratSororityEl) profileFratSororityEl.value = "";
+    if (profileFavoritePittClubEl) profileFavoritePittClubEl.value = "";
     if (profileOptInEl) profileOptInEl.checked = false;
   }
 
@@ -122,6 +150,34 @@
     if (profileHomeCountyEl) profileHomeCountyEl.value = row.home_county ?? "";
     if (profileOptInEl) {
       profileOptInEl.checked = !!row.is_opted_in;
+    }
+    if (profileHighSchoolEl) profileHighSchoolEl.value = row.high_school ?? "";
+    if (profileFreshmanDormEl) {
+      profileFreshmanDormEl.value = row.freshman_dorm ?? "";
+    }
+    if (profileCampusJobEl) profileCampusJobEl.value = row.campus_job ?? "";
+    if (profileFavoriteFloorCathyEl) {
+      const f = row.favorite_floor_of_cathy;
+      profileFavoriteFloorCathyEl.value =
+        f != null && f !== "" ? String(f) : "";
+    }
+    if (profileFavoriteDiningEl) {
+      profileFavoriteDiningEl.value = row.favorite_dining_option ?? "";
+    }
+    if (profileMostUsedBusEl) {
+      profileMostUsedBusEl.value = row.most_used_bus_number ?? "";
+    }
+    if (profileWorstProfessorEl) {
+      profileWorstProfessorEl.value = row.worst_professor_taken ?? "";
+    }
+    if (profileBestProfessorEl) {
+      profileBestProfessorEl.value = row.best_professor_taken ?? "";
+    }
+    if (profileFratSororityEl) {
+      profileFratSororityEl.value = row.frat_sorority ?? "";
+    }
+    if (profileFavoritePittClubEl) {
+      profileFavoritePittClubEl.value = row.favorite_pitt_club ?? "";
     }
   }
 
@@ -301,15 +357,26 @@
       }
       const email = user.email ?? "";
       const str = (el) => (el && el.value ? el.value.trim() : "");
+      const sel = (el) => (el && el.value ? el.value : null);
       const payload = {
         id: user.id,
         email,
         first_name: str(profileFirstNameEl) || null,
         last_name: str(profileLastNameEl) || null,
         major: str(profileMajorEl) || null,
-        year: profileYearEl && profileYearEl.value ? profileYearEl.value : null,
+        year: sel(profileYearEl),
         favorite_sport: str(profileFavoriteSportEl) || null,
         home_county: str(profileHomeCountyEl) || null,
+        high_school: str(profileHighSchoolEl) || null,
+        freshman_dorm: str(profileFreshmanDormEl) || null,
+        campus_job: str(profileCampusJobEl) || null,
+        favorite_floor_of_cathy: sel(profileFavoriteFloorCathyEl),
+        favorite_dining_option: str(profileFavoriteDiningEl) || null,
+        most_used_bus_number: sel(profileMostUsedBusEl),
+        worst_professor_taken: str(profileWorstProfessorEl) || null,
+        best_professor_taken: str(profileBestProfessorEl) || null,
+        frat_sorority: str(profileFratSororityEl) || null,
+        favorite_pitt_club: str(profileFavoritePittClubEl) || null,
         is_opted_in: !!(profileOptInEl && profileOptInEl.checked),
         updated_at: new Date().toISOString(),
       };

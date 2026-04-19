@@ -636,9 +636,11 @@ body {
 
 .profile-modal__panel {
   position: relative;
-  width: min(520px, 100%);
-  max-height: min(92dvh, 720px);
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  width: min(560px, 100%);
+  max-height: min(90dvh, 88svh);
+  overflow: hidden;
   background: var(--surface-card);
   color: var(--ink);
   border-radius: var(--radius-lg);
@@ -648,11 +650,16 @@ body {
 
 .profile-modal__header {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
   padding: 1rem 1.15rem 0.5rem;
   border-bottom: 1px solid var(--border);
+  background: var(--surface-card);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .profile-modal__title {
@@ -682,7 +689,34 @@ body {
 }
 
 .profile-modal__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   padding: 1rem 1.15rem 1.25rem;
+}
+
+.profile-modal__section {
+  margin-top: 1.35rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.profile-modal__section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.profile-modal__section-title {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--pitt-blue);
+  letter-spacing: -0.01em;
 }
 
 .profile-modal__grid {

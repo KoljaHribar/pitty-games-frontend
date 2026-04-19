@@ -230,71 +230,286 @@
           </button>
         </div>
         <div class="profile-modal__body">
-          <div class="profile-modal__grid">
-            <div class="profile-modal__field">
-              <label class="profile-modal__label" for="profile-first-name"
-                >First name</label>
-              <input
-                id="profile-first-name"
-                type="text"
-                name="first_name"
-                autocomplete="given-name"
-                class="profile-modal__input"
-              />
+          <section
+            class="profile-modal__section"
+            aria-labelledby="profile-section-about"
+          >
+            <h3 id="profile-section-about" class="profile-modal__section-title">
+              About you
+            </h3>
+            <div class="profile-modal__grid">
+              <div class="profile-modal__field">
+                <label class="profile-modal__label" for="profile-first-name"
+                  >First name</label>
+                <input
+                  id="profile-first-name"
+                  type="text"
+                  name="first_name"
+                  autocomplete="given-name"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field">
+                <label class="profile-modal__label" for="profile-last-name"
+                  >Last name</label>
+                <input
+                  id="profile-last-name"
+                  type="text"
+                  name="last_name"
+                  autocomplete="family-name"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-home-county"
+                  >Home county</label>
+                <input
+                  id="profile-home-county"
+                  type="text"
+                  name="home_county"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-favorite-sport"
+                  >Favorite sport</label>
+                <input
+                  id="profile-favorite-sport"
+                  type="text"
+                  name="favorite_sport"
+                  class="profile-modal__input"
+                />
+              </div>
             </div>
-            <div class="profile-modal__field">
-              <label class="profile-modal__label" for="profile-last-name"
-                >Last name</label>
-              <input
-                id="profile-last-name"
-                type="text"
-                name="last_name"
-                autocomplete="family-name"
-                class="profile-modal__input"
-              />
+          </section>
+
+          <section
+            class="profile-modal__section"
+            aria-labelledby="profile-section-academics"
+          >
+            <h3
+              id="profile-section-academics"
+              class="profile-modal__section-title"
+            >
+              Academics
+            </h3>
+            <div class="profile-modal__grid">
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-high-school"
+                  >High school</label>
+                <input
+                  id="profile-high-school"
+                  type="text"
+                  name="high_school"
+                  autocomplete="off"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-major"
+                  >Major</label>
+                <input
+                  id="profile-major"
+                  type="text"
+                  name="major"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-year">Year</label>
+                <select
+                  id="profile-year"
+                  name="year"
+                  class="profile-modal__input profile-modal__select"
+                >
+                  <option value="">Select year</option>
+                  <option value="Freshman">Freshman</option>
+                  <option value="Sophomore">Sophomore</option>
+                  <option value="Junior">Junior</option>
+                  <option value="Senior">Senior</option>
+                  <option value="Grad">Grad</option>
+                </select>
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label
+                  class="profile-modal__label"
+                  for="profile-worst-professor"
+                  >Worst professor taken</label>
+                <input
+                  id="profile-worst-professor"
+                  type="text"
+                  name="worst_professor_taken"
+                  autocomplete="off"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label
+                  class="profile-modal__label"
+                  for="profile-best-professor"
+                  >Best professor taken</label>
+                <input
+                  id="profile-best-professor"
+                  type="text"
+                  name="best_professor_taken"
+                  autocomplete="off"
+                  class="profile-modal__input"
+                />
+              </div>
             </div>
-            <div class="profile-modal__field profile-modal__field--full">
-              <label class="profile-modal__label" for="profile-major"
-                >Major</label>
-              <input
-                id="profile-major"
-                type="text"
-                name="major"
-                class="profile-modal__input"
-              />
+          </section>
+
+          <section
+            class="profile-modal__section"
+            aria-labelledby="profile-section-campus"
+          >
+            <h3
+              id="profile-section-campus"
+              class="profile-modal__section-title"
+            >
+              Campus &amp; community
+            </h3>
+            <div class="profile-modal__grid">
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-freshman-dorm"
+                  >Freshman dorm</label>
+                <input
+                  id="profile-freshman-dorm"
+                  type="text"
+                  name="freshman_dorm"
+                  autocomplete="off"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-campus-job"
+                  >Campus job</label>
+                <input
+                  id="profile-campus-job"
+                  type="text"
+                  name="campus_job"
+                  autocomplete="organization-title"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field">
+                <label
+                  class="profile-modal__label"
+                  for="profile-favorite-floor-cathy"
+                  >Favorite floor of Cathy</label>
+                <select
+                  id="profile-favorite-floor-cathy"
+                  name="favorite_floor_of_cathy"
+                  class="profile-modal__input profile-modal__select"
+                >
+                  <option value="">Select floor</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                  <option value="32">32</option>
+                  <option value="33">33</option>
+                  <option value="34">34</option>
+                  <option value="35">35</option>
+                  <option value="36">36</option>
+                  <option value="37">37</option>
+                  <option value="38">38</option>
+                  <option value="39">39</option>
+                  <option value="40">40</option>
+                </select>
+              </div>
+              <div class="profile-modal__field">
+                <label
+                  class="profile-modal__label"
+                  for="profile-most-used-bus"
+                  >Most used bus</label>
+                <select
+                  id="profile-most-used-bus"
+                  name="most_used_bus_number"
+                  class="profile-modal__input profile-modal__select"
+                >
+                  <option value="">Select route</option>
+                  <option value="71A">71A</option>
+                  <option value="71B">71B</option>
+                  <option value="71C">71C</option>
+                  <option value="71D">71D</option>
+                  <option value="61A">61A</option>
+                  <option value="61B">61B</option>
+                  <option value="61C">61C</option>
+                  <option value="61D">61D</option>
+                  <option value="10A">10A</option>
+                  <option value="28X">28X</option>
+                  <option value="54">54</option>
+                  <option value="67">67</option>
+                </select>
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label
+                  class="profile-modal__label"
+                  for="profile-favorite-dining"
+                  >Favorite dining option</label>
+                <input
+                  id="profile-favorite-dining"
+                  type="text"
+                  name="favorite_dining_option"
+                  autocomplete="off"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label class="profile-modal__label" for="profile-frat-sorority"
+                  >Frat / sorority (Type "N/A" if not applicable)</label>
+                <input
+                  id="profile-frat-sorority"
+                  type="text"
+                  name="frat_sorority"
+                  autocomplete="off"
+                  class="profile-modal__input"
+                />
+              </div>
+              <div class="profile-modal__field profile-modal__field--full">
+                <label
+                  class="profile-modal__label"
+                  for="profile-favorite-pitt-club"
+                  >Favorite Pitt club</label>
+                <input
+                  id="profile-favorite-pitt-club"
+                  type="text"
+                  name="favorite_pitt_club"
+                  autocomplete="off"
+                  class="profile-modal__input"
+                />
+              </div>
             </div>
-            <div class="profile-modal__field profile-modal__field--full">
-              <label class="profile-modal__label" for="profile-year">Year</label>
-              <select id="profile-year" name="year" class="profile-modal__input profile-modal__select">
-                <option value="">Select year</option>
-                <option value="Freshman">Freshman</option>
-                <option value="Sophomore">Sophomore</option>
-                <option value="Junior">Junior</option>
-                <option value="Senior">Senior</option>
-                <option value="Grad">Grad</option>
-              </select>
-            </div>
-            <div class="profile-modal__field profile-modal__field--full">
-              <label class="profile-modal__label" for="profile-favorite-sport"
-                >Favorite sport</label>
-              <input
-                id="profile-favorite-sport"
-                type="text"
-                name="favorite_sport"
-                class="profile-modal__input"
-              />
-            </div>
-            <div class="profile-modal__field profile-modal__field--full">
-              <label class="profile-modal__label" for="profile-home-county"
-                >Home county</label>
-              <input
-                id="profile-home-county"
-                type="text"
-                name="home_county"
-                class="profile-modal__input"
-              />
-            </div>
-          </div>
+          </section>
+
           <div class="profile-modal__checkbox-wrap">
             <input
               type="checkbox"
