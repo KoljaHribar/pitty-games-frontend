@@ -97,15 +97,35 @@
     return `${first || ""} ${last || ""}`.trim();
   }
 
+  const EMPTY_KEY = "\0__EMPTY__\0";
+
+  /**
+   * Values treated as "no real answer" for clustering purposes. A group of
+   * people who all wrote "N/A" or "None" is not a meaningful connection,
+   * so we exclude those buckets when picking the 4-cluster.
+   */
+  const BLANKISH_VALUES = new Set([
+    "n/a",
+    "na",
+    "none",
+    "nothing",
+    "no",
+    "no answer",
+    "-",
+    "—",
+  ]);
+
   /**
    * Grouping key: trim, lowercase, stringify so " CS " and "cs" match; null/"" → empty bucket.
    * @param {unknown} v
    */
   function attrGroupKey(v) {
-    if (v == null || v === "") return "\0__EMPTY__\0";
+    if (v == null || v === "") return EMPTY_KEY;
     const s = String(v).trim();
-    if (s === "") return "\0__EMPTY__\0";
-    return s.toLowerCase();
+    if (s === "") return EMPTY_KEY;
+    const lower = s.toLowerCase();
+    if (BLANKISH_VALUES.has(lower)) return EMPTY_KEY;
+    return lower;
   }
 
   /**
@@ -129,16 +149,44 @@
   }
 
   /**
+   * FNV-1a 32-bit hash — deterministic across browsers, no crypto needed.
+   * @param {string} s
+   */
+  function simpleHash(s) {
+    let h = 2166136261 >>> 0;
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619) >>> 0;
+    }
+    return h >>> 0;
+  }
+
+  /**
+   * @param {Record<string, unknown>} a
+   * @param {Record<string, unknown>} b
+   */
+  function byFirstName(a, b) {
+    return String(a.first_name || "").localeCompare(
+      String(b.first_name || ""),
+      undefined,
+      { sensitivity: "base" }
+    );
+  }
+
+  /**
+   * Try to build a strict puzzle where 4 others share a value for some attribute
+   * and the impostor's value for that attribute differs.
    * @param {Record<string, unknown>} impostor
    * @param {Record<string, unknown>[]} allProfiles
    * @returns {{ attr: string, value: string, cluster: Record<string, unknown>[], roster: Record<string, unknown>[] } | null}
    */
-  function buildDailyPuzzleStrict(impostor, allProfiles) {
-    const impId = impostor.id;
+  function buildStrictWithImpostor(impostor, allProfiles) {
+    const impId = impostor && impostor.id;
+    if (!impId) return null;
     const others = allProfiles.filter(
       (p) => p && String(p.id) !== String(impId)
     );
-    if (!impId) return null;
+    if (others.length < 4) return null;
 
     for (const attr of CONNECTION_ATTRS) {
       const impKey = impostorGroupKey(impostor, attr);
@@ -155,28 +203,17 @@
       for (const [key, list] of byKey) {
         if (list.length < 4) continue;
         if (key === impKey) continue;
+        if (key === EMPTY_KEY) continue;
         candidates.push({ key, list });
       }
       if (!candidates.length) continue;
 
       candidates.sort((a, b) => a.key.localeCompare(b.key));
       const chosen = candidates[0];
-      const sortedCluster = [...chosen.list].sort((a, b) =>
-        String(a.first_name || "").localeCompare(
-          String(b.first_name || ""),
-          undefined,
-          { sensitivity: "base" }
-        )
-      );
+      const sortedCluster = [...chosen.list].sort(byFirstName);
       const cluster = sortedCluster.slice(0, 4);
       const displayValue = displayAttrValue(cluster[0], attr);
-      const roster = [...cluster, impostor].sort((a, b) =>
-        String(a.first_name || "").localeCompare(
-          String(b.first_name || ""),
-          undefined,
-          { sensitivity: "base" }
-        )
-      );
+      const roster = [...cluster, impostor].sort(byFirstName);
       return {
         attr,
         value: displayValue,
@@ -188,49 +225,93 @@
   }
 
   /**
-   * When exactly five profiles are visible, the non-impostors are always four people.
-   * If no attribute separates a 4-cluster from the impostor, still ship a playable round.
-   * @param {Record<string, unknown>} impostor
+   * Find any profile in the pool that can be an impostor in a strict puzzle.
+   * When multiple profiles qualify, pick deterministically using the seed so
+   * everyone sees the same puzzle on the same day.
    * @param {Record<string, unknown>[]} allProfiles
+   * @param {string} seed
    */
-  function buildDailyPuzzleFivePersonPool(impostor, allProfiles) {
-    if (allProfiles.length !== 5) return null;
-    const impId = impostor.id;
-    const others = allProfiles.filter(
-      (p) => p && String(p.id) !== String(impId)
+  function findAnyStrictPuzzle(allProfiles, seed) {
+    const sorted = [...allProfiles].sort((a, b) =>
+      String(a.id || "").localeCompare(String(b.id || ""))
     );
-    if (others.length !== 4) return null;
-    const cluster = [...others].sort((a, b) =>
-      String(a.first_name || "").localeCompare(
-        String(b.first_name || ""),
-        undefined,
-        { sensitivity: "base" }
-      )
+    /** @type {{ impostor: Record<string, unknown>, puzzle: ReturnType<typeof buildStrictWithImpostor> }[]} */
+    const candidates = [];
+    for (const p of sorted) {
+      const puzzle = buildStrictWithImpostor(p, allProfiles);
+      if (puzzle) candidates.push({ impostor: p, puzzle });
+    }
+    if (!candidates.length) return null;
+    const idx = simpleHash(seed) % candidates.length;
+    const { impostor, puzzle } = candidates[idx];
+    return {
+      attr: puzzle.attr,
+      value: puzzle.value,
+      cluster: puzzle.cluster,
+      roster: puzzle.roster,
+      impostorProfile: impostor,
+    };
+  }
+
+  /**
+   * Last-resort fallback: we couldn't find any attribute that splits 4-vs-1.
+   * Still ship a playable round by picking an impostor and 4 other profiles
+   * deterministically, labeled as the generic "__pool__" connection.
+   * @param {Record<string, unknown>[]} allProfiles
+   * @param {string} seed
+   * @param {Record<string, unknown> | null} preferredImpostor
+   */
+  function buildPoolPuzzle(allProfiles, seed, preferredImpostor) {
+    if (allProfiles.length < 5) return null;
+    const sortedById = [...allProfiles].sort((a, b) =>
+      String(a.id || "").localeCompare(String(b.id || ""))
     );
-    const roster = [...cluster, impostor].sort((a, b) =>
-      String(a.first_name || "").localeCompare(
-        String(b.first_name || ""),
-        undefined,
-        { sensitivity: "base" }
-      )
+    const impostor =
+      preferredImpostor &&
+      sortedById.some((p) => String(p.id) === String(preferredImpostor.id))
+        ? preferredImpostor
+        : sortedById[simpleHash(seed) % sortedById.length];
+    const others = sortedById.filter(
+      (p) => String(p.id) !== String(impostor.id)
     );
+    // Rotate the "4 of 6" selection by date so different players appear on
+    // different days even when no shared attribute exists.
+    const rotation = simpleHash(seed + ":pool") % others.length;
+    const rotated = others.slice(rotation).concat(others.slice(0, rotation));
+    const cluster = rotated.slice(0, 4).sort(byFirstName);
+    const roster = [...cluster, impostor].sort(byFirstName);
     return {
       attr: "__pool__",
       value: "",
       cluster,
       roster,
+      impostorProfile: impostor,
     };
   }
 
   /**
-   * @param {Record<string, unknown>} impostor
+   * Main entry point: try the scheduled impostor first; otherwise fall back to
+   * any profile that produces a strict puzzle; otherwise ship a pool-mode round.
+   * @param {Record<string, unknown> | null} scheduledImpostor
    * @param {Record<string, unknown>[]} allProfiles
+   * @param {string} seed
    */
-  function buildDailyPuzzle(impostor, allProfiles) {
-    return (
-      buildDailyPuzzleStrict(impostor, allProfiles) ||
-      buildDailyPuzzleFivePersonPool(impostor, allProfiles)
-    );
+  function buildDailyPuzzle(scheduledImpostor, allProfiles, seed) {
+    if (scheduledImpostor) {
+      const strict = buildStrictWithImpostor(scheduledImpostor, allProfiles);
+      if (strict) {
+        return {
+          attr: strict.attr,
+          value: strict.value,
+          cluster: strict.cluster,
+          roster: strict.roster,
+          impostorProfile: scheduledImpostor,
+        };
+      }
+    }
+    const any = findAnyStrictPuzzle(allProfiles, seed);
+    if (any) return any;
+    return buildPoolPuzzle(allProfiles, seed, scheduledImpostor);
   }
 
   /**
@@ -485,12 +566,6 @@
         showError("Could not load today’s puzzle. Please try again later.");
         return;
       }
-      if (!puzzleRow || !puzzleRow.target_profile_id) {
-        showError("There is no puzzle scheduled for today yet.");
-        return;
-      }
-
-      const targetId = puzzleRow.target_profile_id;
 
       const { data: allRows, error: allErr } = await supabase
         .from("profiles")
@@ -504,15 +579,22 @@
 
       /** @type {Record<string, unknown>[]} */
       const allProfiles = allRows;
-      const impostor = allProfiles.find(
-        (p) => String(p.id) === String(targetId)
-      );
-      if (!impostor) {
-        showError("Could not load the impostor’s profile.");
+
+      if (allProfiles.length < 5) {
+        showError(
+          "Impostor needs at least 5 profiles in the database. Check back later."
+        );
         return;
       }
 
-      const puzzle = buildDailyPuzzle(impostor, allProfiles);
+      const scheduledImpostor =
+        puzzleRow && puzzleRow.target_profile_id
+          ? allProfiles.find(
+              (p) => String(p.id) === String(puzzleRow.target_profile_id)
+            ) || null
+          : null;
+
+      const puzzle = buildDailyPuzzle(scheduledImpostor, allProfiles, todayStr);
       if (!puzzle) {
         showError(
           "Today’s puzzle could not be built from profile data. Check back later."
@@ -520,6 +602,8 @@
         return;
       }
 
+      const impostor = puzzle.impostorProfile;
+      const targetId = String(impostor.id);
       const impostorFullName = fullNameFromParts(
         impostor.first_name,
         impostor.last_name
