@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Student of the Day — a daily PittHub spotlight on a fellow Panther."
+    />
+    <title>Student of the Day — PittHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#student-of-the-day-main">Skip to spotlight</a>
+
+    <header class="site-header" role="banner">
+      <div class="header-top">
+        <div class="header-bridge" aria-hidden="true">
+          <img
+            class="bridge-svg"
+            src="bridge.svg"
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+          />
+        </div>
+        <div class="header-brand">
+          <h1 class="site-title">PittHub</h1>
+          <p class="site-tagline">Open community for Panthers</p>
+        </div>
+        <nav class="header-auth" aria-label="Game navigation">
+          <a href="index.html" class="btn btn--ghost">Hub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="student-of-the-day-main" class="sotd-main" tabindex="-1">
+      <div class="sotd-back">
+        <a href="index.html" class="btn btn--solid">← Back</a>
+      </div>
+
+      <p id="sotd-error" class="guess-who-error" role="alert" hidden></p>
+
+      <article class="sotd-card" id="sotd-card" hidden>
+        <header class="sotd-card__hero">
+          <div class="sotd-card__eyebrow">
+            <span class="sotd-card__badge" aria-hidden="true">★</span>
+            <span class="sotd-card__eyebrow-label">Student of the Day</span>
+            <span class="sotd-card__eyebrow-sep" aria-hidden="true">·</span>
+            <time id="sotd-date" class="sotd-card__eyebrow-date"></time>
+          </div>
+          <h2 id="sotd-name" class="sotd-card__name">—</h2>
+          <p id="sotd-subline" class="sotd-card__subline"></p>
+        </header>
+
+        <div class="sotd-card__body">
+          <section
+            class="sotd-section"
+            id="sotd-section-about"
+            aria-labelledby="sotd-section-about-title"
+            hidden
+          >
+            <h3 id="sotd-section-about-title" class="sotd-section__title">
+              About
+            </h3>
+            <ul class="sotd-facts" id="sotd-facts-about"></ul>
+          </section>
+
+          <section
+            class="sotd-section"
+            id="sotd-section-academics"
+            aria-labelledby="sotd-section-academics-title"
+            hidden
+          >
+            <h3 id="sotd-section-academics-title" class="sotd-section__title">
+              Academics
+            </h3>
+            <ul class="sotd-facts" id="sotd-facts-academics"></ul>
+          </section>
+
+          <section
+            class="sotd-section"
+            id="sotd-section-campus"
+            aria-labelledby="sotd-section-campus-title"
+            hidden
+          >
+            <h3 id="sotd-section-campus-title" class="sotd-section__title">
+              Campus &amp; community
+            </h3>
+            <ul class="sotd-facts" id="sotd-facts-campus"></ul>
+          </section>
+        </div>
+
+        <footer class="sotd-card__footer">
+          <span class="sotd-card__footer-text">
+            Meet a new Panther tomorrow. Opt in on your profile to be featured.
+          </span>
+        </footer>
+      </article>
+
+      <div id="sotd-loading" class="sotd-loading" aria-live="polite">
+        Loading today’s Panther…
+      </div>
+    </main>
+
+    <script src="student-of-the-day.js" defer></script>
+  </body>
+</html>

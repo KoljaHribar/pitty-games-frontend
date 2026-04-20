@@ -383,6 +383,30 @@ body {
   width: 32px;
   transform: rotate(12deg);
 }
+.decor--paw-l-9 {
+  top: 9%;
+  right: calc(100% + 60px);
+  width: 30px;
+  transform: rotate(22deg);
+}
+.decor--paw-l-10 {
+  top: 33%;
+  right: calc(100% + 80px);
+  width: 36px;
+  transform: rotate(-52deg);
+}
+.decor--paw-l-11 {
+  top: 60%;
+  right: calc(100% + 130px);
+  width: 28px;
+  transform: rotate(28deg);
+}
+.decor--paw-l-12 {
+  top: 86%;
+  right: calc(100% + 55px);
+  width: 34px;
+  transform: rotate(-24deg);
+}
 
 /* ---- Right white space: 8 paws scattered at varied offsets/rotations. ---- */
 .decor--paw-r-1 {
@@ -433,6 +457,30 @@ body {
   width: 30px;
   transform: rotate(-20deg);
 }
+.decor--paw-r-9 {
+  top: 12%;
+  left: calc(100% + 55px);
+  width: 32px;
+  transform: rotate(-38deg);
+}
+.decor--paw-r-10 {
+  top: 37%;
+  left: calc(100% + 40px);
+  width: 36px;
+  transform: rotate(30deg);
+}
+.decor--paw-r-11 {
+  top: 65%;
+  left: calc(100% + 80px);
+  width: 30px;
+  transform: rotate(-50deg);
+}
+.decor--paw-r-12 {
+  top: 90%;
+  left: calc(100% + 60px);
+  width: 34px;
+  transform: rotate(26deg);
+}
 
 /* Hide the most far-out paws on narrow viewports where the white strip
    collapses and they would sit off-screen. */
@@ -441,10 +489,14 @@ body {
   .decor--paw-l-4,
   .decor--paw-l-6,
   .decor--paw-l-8,
+  .decor--paw-l-10,
+  .decor--paw-l-11,
   .decor--paw-r-2,
   .decor--paw-r-4,
   .decor--paw-r-5,
-  .decor--paw-r-7 {
+  .decor--paw-r-7,
+  .decor--paw-r-9,
+  .decor--paw-r-11 {
     display: none;
   }
 }
@@ -2039,6 +2091,237 @@ a.game-card.game-card--link:visited {
 @media (prefers-reduced-motion: reduce) {
   .program-card,
   .program-card.is-flying {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Student of the Day
+   A single "spotlight" card with a blue-to-gold gradient hero
+   and sectioned fact tiles.
+   ============================================================ */
+
+.sotd-main {
+  width: 100%;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.75rem)
+    max(1rem, calc(var(--safe-right) + 0.75rem))
+    clamp(2rem, 5vw, 3rem)
+    max(1rem, calc(var(--safe-left) + 0.75rem));
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sotd-back {
+  margin-bottom: 1rem;
+}
+
+.sotd-loading {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.sotd-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sotd-card__hero {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.25rem, 4vw, 2rem)
+    clamp(1.75rem, 4vw, 2.5rem);
+  background: var(--header-gradient);
+  color: #f0f4ff;
+  border-bottom: 4px solid var(--pitt-gold);
+  overflow: hidden;
+}
+
+.sotd-card__hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(255, 184, 28, 0.22) 0%,
+      rgba(255, 184, 28, 0) 55%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(255, 184, 28, 0.14) 0%,
+      rgba(255, 184, 28, 0) 60%
+    );
+  pointer-events: none;
+}
+
+.sotd-card__hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sotd-card__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 184, 28, 0.18);
+  border: 1px solid rgba(255, 184, 28, 0.45);
+  color: var(--pitt-gold);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sotd-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--pitt-gold);
+  color: var(--pitt-blue-dark);
+  font-size: 0.7rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.sotd-card__eyebrow-sep {
+  opacity: 0.6;
+}
+
+.sotd-card__eyebrow-date {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.sotd-card__name {
+  margin: 0.9rem 0 0.3rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0, 31, 92, 0.35);
+}
+
+.sotd-card__subline {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sotd-card__subline[hidden] {
+  display: none;
+}
+
+.sotd-card__body {
+  padding: clamp(1.25rem, 3.5vw, 1.75rem) clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.sotd-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sotd-section[hidden] {
+  display: none;
+}
+
+.sotd-section__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--pitt-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.sotd-section__title::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--pitt-gold) 0%,
+    rgba(255, 184, 28, 0.15) 60%,
+    rgba(255, 184, 28, 0) 100%
+  );
+  border-radius: 2px;
+}
+
+.sotd-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.6rem;
+}
+
+.sotd-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.85rem;
+  background: rgba(0, 53, 148, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--pitt-gold);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.sotd-fact:hover {
+  background: rgba(0, 53, 148, 0.07);
+  transform: translateY(-1px);
+}
+
+.sotd-fact__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.sotd-fact__value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.sotd-card__footer {
+  padding: 0.9rem clamp(1.25rem, 4vw, 2rem);
+  background: rgba(0, 53, 148, 0.04);
+  border-top: 1px solid var(--border);
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sotd-fact {
     transition: none;
   }
 }
