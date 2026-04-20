@@ -8,9 +8,9 @@
     />
     <meta
       name="description"
-      content="Pitty Games — daily Pitt-themed games: Guess Who, Impostor, Wordle, Connections."
+      content="PittHub — an open community for Panthers with Pitt-themed games and tools: Guess Who, Impostor, Wordle, Study Abroad Matcher."
     />
-    <title>Pitty Games</title>
+    <title>PittHub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,10 +24,18 @@
 
     <header class="site-header" role="banner">
       <div class="header-top">
-        <div class="header-spacer" aria-hidden="true"></div>
+        <div class="header-bridge" aria-hidden="true">
+          <img
+            class="bridge-svg"
+            src="bridge.svg"
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+          />
+        </div>
         <div class="header-brand">
-          <h1 class="site-title">Pitty Games</h1>
-          <p class="site-tagline">Daily challenges for Panthers</p>
+          <h1 class="site-title">PittHub</h1>
+          <p class="site-tagline">Open community for Panthers</p>
         </div>
 
         <nav class="header-auth" aria-label="Account">
@@ -53,16 +61,33 @@
 
     <main id="games" class="main" tabindex="-1">
       <h2 class="visually-hidden">Choose a game</h2>
-      <div class="card-grid" role="list">
+      <div class="card-grid-wrap">
+        <div class="card-grid-decor" aria-hidden="true">
+          <span class="decor decor--paw decor--paw-l-1"></span>
+          <span class="decor decor--paw decor--paw-l-2"></span>
+          <span class="decor decor--paw decor--paw-l-3"></span>
+          <span class="decor decor--paw decor--paw-l-4"></span>
+          <span class="decor decor--paw decor--paw-l-5"></span>
+          <span class="decor decor--paw decor--paw-l-6"></span>
+          <span class="decor decor--paw decor--paw-l-7"></span>
+          <span class="decor decor--paw decor--paw-l-8"></span>
+          <span class="decor decor--paw decor--paw-r-1"></span>
+          <span class="decor decor--paw decor--paw-r-2"></span>
+          <span class="decor decor--paw decor--paw-r-3"></span>
+          <span class="decor decor--paw decor--paw-r-4"></span>
+          <span class="decor decor--paw decor--paw-r-5"></span>
+          <span class="decor decor--paw decor--paw-r-6"></span>
+          <span class="decor decor--paw decor--paw-r-7"></span>
+          <span class="decor decor--paw decor--paw-r-8"></span>
+        </div>
+        <div class="card-grid" role="list">
         <a
           href="guess-who.html"
           class="game-card game-card--link"
           role="listitem"
           aria-label="Open Guess Who"
         >
-          <span class="game-card__icon" aria-hidden="true">?</span>
           <span class="game-card__title">Guess Who</span>
-          <span class="game-card__hint">Daily puzzle</span>
           <span id="guess-who-hub-score" class="game-card__score" hidden></span>
         </a>
         <a
@@ -71,9 +96,7 @@
           role="listitem"
           aria-label="Open Impostor"
         >
-          <span class="game-card__icon" aria-hidden="true">!</span>
           <span class="game-card__title">Impostor</span>
-          <span class="game-card__hint">Odd one out</span>
           <span id="impostor-hub-score" class="game-card__score" hidden></span>
         </a>
         <a
@@ -82,9 +105,7 @@
           role="listitem"
           aria-label="Open Wordle"
         >
-          <span class="game-card__icon" aria-hidden="true">W</span>
           <span class="game-card__title">Wordle</span>
-          <span class="game-card__hint">Daily last name</span>
           <span id="wordle-hub-score" class="game-card__score" hidden></span>
         </a>
         <a
@@ -93,35 +114,36 @@
           role="listitem"
           aria-label="Open Study Abroad Matcher"
         >
-          <span class="game-card__icon" aria-hidden="true">✈</span>
           <span class="game-card__title">Study Abroad Matcher</span>
-          <span class="game-card__hint">Swipe to find your program</span>
         </a>
+        </div>
       </div>
     </main>
 
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <section class="footer-block">
-          <h2 class="footer-heading">What are Pitty Games?</h2>
+          <h2 class="footer-heading">What is PittHub?</h2>
           <p>
-            Pitty Games are your home for daily Pitt games. Test your knowledge
-            of students, the university, and the city through games like Grid,
-            Bingo, Wordle, Connections with new challenges every single day.
+            PittHub is an open community for Panthers — a shared space to
+            connect, play, and discover. Explore Pitt-themed games and tools
+            built by students, for students.
           </p>
         </section>
         <section class="footer-block">
-          <h2 class="footer-heading">When do daily games reset?</h2>
+          <h2 class="footer-heading">Who can join?</h2>
           <p>
-            Games reset every day at midnight, allowing you to play fresh set
-            of challenges every 24 hours.
+            Every Panther is welcome. Create a profile, opt in to the community,
+            and take part in daily games, matchers, and experiences shaped by
+            the Pitt student body.
           </p>
         </section>
         <section class="footer-block">
-          <h2 class="footer-heading">Will new games be added?</h2>
+          <h2 class="footer-heading">What's next for PittHub?</h2>
           <p>
-            Absolutely. Pitty Games are expanding with new daily game modes,
-            along with fresh challenges to keep things exciting.
+            PittHub keeps growing. New community features, games, and tools are
+            added over time to keep the hub fresh and useful for everyone at
+            Pitt.
           </p>
         </section>
         <p class="footer-credit">

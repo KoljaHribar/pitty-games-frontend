@@ -389,3 +389,37 @@ In `study-abroad.js`:
 ### 6 — Top match results screen on deck empty
 
 Add a "Top match" results screen once the deck empties. Track liked programs during the session. When `remainingPrograms` is empty, hide the swipe actions and display the liked program closest (smallest Euclidean distance) to `userProfileVector` as the top match — show its image, name, location, a "Why you'll love it" block populated from `pro_text`, a "Based on N liked programs" meta line, and Start over / Back to home buttons. Handle the zero-likes case gracefully.
+
+## Crucial prompts (Home-screen card UI refresh)
+
+### 1 — Card layout redesign
+
+Make the follwoing changes to the UI of the cards on home screen:
+- Make the title bigger, centralized and follow the Pitt theme
+- Delete the current emojies in the top right side of the cards
+- Delete the mini description of the game from evey card on home screen
+- Make the Score and Title appear more visually modern and exciting. No bland simple white background Cards with just words and a hwole lot of empty space
+
+### 2 — Gold enticing titles
+
+This looks a lot better. Now make the titles of the card in gold and not just plain text but a bit more inticing, attracting the user to click on them.
+
+### 3 — Lightning strikes around the cards
+
+Great. now put somethign like golden lightning strikes and similar stuff that goes out of the cards to give some life to the plain white background that the cards are sitting on
+
+### 4 — Horizontal-only lightning to screen edges
+
+Remove the ligthningh you made. Make a new lightning, longer objects that extend from the left/right sides of the cards and end at left/right corners of the screen. no lightning should go up or down, only left and right.
+
+### 5 — Multiple spread-out bolts per card with arrow tips
+
+Better. But put more lightnings out of the cards, currently its a single bolt per card. Make it multiple bolts per card and make them be spread out, not mimicking a straight line. Have them start from the cards and end right before the left/right sides of a screen with a little arrow at the end
+
+### 6 — Wider fan, corner-aimed, branched, solid gold, no intersections
+
+Better. Add more bolts for each card. I like the fact that it is symetric, but make them more srepad out. A couple of bolts shoudl aim for the bottom/top right/left parts of the white chunk fo the screen. Remove the mini stars at the end of the bolts, dont make the bolts a fading colour, make the strong gold. Some lightning bolt sshould have multiple lightning bols come out of them, spreading like branches on a tree. Make sure the bolts dont intersect though
+
+### 7 — Replace lightning with scattered golden paw prints
+
+Delete the lightning bolts completely. Instead put golden footprints and paws on that empty white space right and left of the cards. Make the footprints be spread out, on random locations in that empty white space.
