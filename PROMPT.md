@@ -268,3 +268,92 @@ Build a **Wordle**-style game as a **standalone** `wordle.html` / `wordle.js` pa
 1. Show **Score** on the **Wordle** card on the home screen **the same way** as Guess Who (e.g. `Score: …` using `user_game_stats` for `game_type = 'wordle'`).
 2. **Fix** Wordle so the answer is **only** the user’s **last name** (no first-name / day-of-month rule).
 3. Update the **game intro** (and related copy) on the Wordle page to match last-name play.
+
+### 24 — Impostor game: full build spec (hub + page + logic)
+
+Context: Daily puzzle web app for university students with working Guess Who and Wordle. Build an **Impostor** odd-one-out game as a standalone page using Vanilla JS/HTML/CSS and Supabase.
+
+1. **Hub (`index.html`)**: Replace Bingo placeholder with **Impostor** and link to `impostor.html`.
+2. **UI (`impostor.html`)**: Keep site header/style; include Supabase CDN; add Back button; subtitle  
+   “Find the Impostor: 4 of these students share something in common. 1 does not. You have 1 guess.”;  
+   render 5 large clickable name buttons; include a results modal matching Guess Who stats layout plus  
+   `<p id="results-modal-explanation">` for post-game explanation.
+3. **Logic (`impostor.js`)**: Use `user_game_stats` upsert flow with `game_type = 'impostor'`; fetch today’s target from `daily_puzzles`; fetch all `profiles`; find first qualifying shared attribute among non-impostors; deterministic sorting by first name; one guess only; on click set win/loss, persist stats, and show modal with explanation + updated score/streak.
+
+### 25 — Impostor puzzle-builder bug with small dataset
+
+When running Impostor, UI showed:  
+“Today’s puzzle could not be built from profile data. Check back later.”
+
+Given only 5 students in the DB, fix the bug so the game still renders and is playable.
+
+### 26 — Hub score visibility for Impostor
+
+Show the **Impostor** score on the home card the same way as Guess Who and Wordle.
+
+### 27 — Always show score badge at zero + missing card scores
+
+Display score even when it is **0** (do not hide the badge for new users).  
+Investigate/fix why **Impostor** and **Connections** card scores were not showing and make them visible.
+
+### 28 — Study Abroad Matcher card + swipeable page
+
+I am adding a 'Study Abroad Matcher' tool to my existing vanilla HTML/JS hub. It will be a card replacing the Connections card, it will have no score and it should link to the study-abroad.html
+
+Create a new file called study-abroad.html. It should use the exact same header, navigation, and footer structure as my guess-who.html file.
+
+In the main content area, create a UI for a stack of swipeable cards (similar to a dating app). Each card should have placeholders for an image, the program name, the location, and a section below for 'AI Pro' and 'AI Con'.
+
+Update style.css to handle the absolute positioning required to stack these cards on top of each other. Add smooth CSS transitions for when a card is dragged and released.
+
+Create a basic study-abroad.js file. Pull in the Hammer.js library via CDN and set up the event listeners so the top card can be dragged. If dragged far enough right, trigger a 'Like' console log and animate the card off-screen. If dragged left, trigger a 'Pass' console log and animate it off-screen.
+
+### 28 — Study Abroad dataset: normalize CSV to JSON feature vectors
+
+I have a CSV structure with columns: `program_name,primary_city,country,cost_of_living_usd_monthly_no_rent,avg_temp_celsius,population_density_per_km2,distance_from_pgh_miles,hrmi_quality_of_life_score,english_proficiency_ef_epi_2024,program_duration_weeks,notes`.
+
+Write a Python script using pandas that applies min-max normalization to numeric columns so every value is between `0.0` and `1.0`, output to `normalized_programs.json`, and include a single `feature_vector` array per program.
+
+### 29 — Enrich Study Abroad JSON cards
+
+Add these 3 columns to the JSON for every program:
+- `image_url`
+- `pro_text`
+- `con_text`
+
+For each program, use a city image plus one unique pro and one unique con.
+
+### 30 — One-off Supabase uploader for study abroad programs
+
+Create `upload.js` using `@supabase/supabase-js` that:
+- reads `normalized_programs.json` from the `programs` array
+- maps fields exactly:
+  - `name` <- `program_name`
+  - `location` <- `"primary_city, country"`
+  - `image_url` <- `image_url`
+  - `pro_text` <- `pro_text`
+  - `con_text` <- `con_text`
+  - `feature_vector` <- `feature_vector`
+- ignores `raw` and `normalized`
+- inserts all records into `study_abroad_programs`
+- logs a success message
+- includes terminal commands to install SDK and run the script
+
+### 31 — Study Abroad UI cleanup: remove header Hub button
+
+Remove the **Hub** button that appears in the top-right side of the screen inside the Study Abroad tool.
+
+## Crucial prompts (Study Abroad data + integration)
+
+### 1 — Study abroad dataset request (initial)
+Find 35 Pitt study abroad programs and gather 6 hard stats for each (2026 Cost of Living in Dollars, Average Temperature, 2026 Population Density, Distance from Pittsburgh, 2026 Human Rights Index).
+
+### 2 — CSV format + 7 stats + sourcing constraints
+Make it be a csv file. I need 7 stats: 2026 Cost of Living in Dollars, Average Temperature, 2026 Population Density, Distance from Pittsburgh, 2026 Human Rights Index, English Proficiency, program duration.
+
+Take all the programs you find from the Pitt study abroad website, pick a main location they are set in and fill out the row in the csv with data for that location (ideally a city, if its multiple cities, average the data out)
+
+Use the most recent published values (2024/2025 from Numbeo, Worldometers, HRMI, Climate-data.org) and label them honestly
+
+### 3 — Supabase table creation + app fetch integration
+Give me the SQL command to create a new Supabase table called study_abroad_programs. It needs the following columns: id (uuid), name (text), location (text), image_url (text), pro_text (text), con_text (text), and feature_vector (float array). Also, provide the JavaScript code to fetch all these rows in my app.js file using my existing Supabase client.

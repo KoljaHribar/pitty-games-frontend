@@ -1,0 +1,1273 @@
+{
+  "feature_order": [
+    "cost_of_living_usd_monthly_no_rent",
+    "avg_temp_celsius",
+    "population_density_per_km2",
+    "distance_from_pgh_miles",
+    "hrmi_quality_of_life_score",
+    "english_proficiency_ef_epi_2024",
+    "program_duration_weeks"
+  ],
+  "programs": [
+    {
+      "program_name": "Pitt in London - Semester",
+      "primary_city": "London",
+      "country": "United Kingdom",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/67/London_Skyline_%28125508655%29.jpeg",
+      "pro_text": "World-class museums (the British Museum, Tate, V&A) are free to enter.",
+      "con_text": "Notoriously grey, drizzly weather and one of the priciest rental markets in Europe.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1200.0,
+        "avg_temp_celsius": 11.0,
+        "population_density_per_km2": 5700.0,
+        "distance_from_pgh_miles": 3720.0,
+        "hrmi_quality_of_life_score": 80.0,
+        "english_proficiency_ef_epi_2024": 700.0,
+        "program_duration_weeks": 16.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.6,
+        "avg_temp_celsius": 0.272727,
+        "population_density_per_km2": 0.265144,
+        "distance_from_pgh_miles": 0.231847,
+        "hrmi_quality_of_life_score": 0.697674,
+        "english_proficiency_ef_epi_2024": 1.0,
+        "program_duration_weeks": 1.0
+      },
+      "feature_vector": [
+        0.6,
+        0.272727,
+        0.265144,
+        0.231847,
+        0.697674,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "program_name": "Pitt in Florence - Summer",
+      "primary_city": "Florence",
+      "country": "Italy",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/FirenzeDec092023_01.jpg",
+      "pro_text": "Walkable Renaissance city center where you can see the Duomo, Uffizi, and Ponte Vecchio in one afternoon.",
+      "con_text": "Summer heat plus dense tour-group crowds make the historic center uncomfortable in peak months.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 900.0,
+        "avg_temp_celsius": 15.0,
+        "population_density_per_km2": 3500.0,
+        "distance_from_pgh_miles": 4600.0,
+        "hrmi_quality_of_life_score": 85.0,
+        "english_proficiency_ef_epi_2024": 553.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.4,
+        "avg_temp_celsius": 0.454545,
+        "population_density_per_km2": 0.155909,
+        "distance_from_pgh_miles": 0.343949,
+        "hrmi_quality_of_life_score": 0.813953,
+        "english_proficiency_ef_epi_2024": 0.402439,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.4,
+        0.454545,
+        0.155909,
+        0.343949,
+        0.813953,
+        0.402439,
+        0.2
+      ]
+    },
+    {
+      "program_name": "Pitt in Sydney - Semester",
+      "primary_city": "Sydney",
+      "country": "Australia",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Sydney_Opera_House_and_Harbour_Bridge_Dusk_%282%29_2019-06-21.jpg",
+      "pro_text": "Iconic harbor lifestyle with world-famous beaches like Bondi a short bus ride from downtown.",
+      "con_text": "Extremely far from almost everywhere \u2014 a 20+ hour flight from Pittsburgh and very expensive groceries.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1300.0,
+        "avg_temp_celsius": 18.0,
+        "population_density_per_km2": 433.0,
+        "distance_from_pgh_miles": 9750.0,
+        "hrmi_quality_of_life_score": 88.0,
+        "english_proficiency_ef_epi_2024": 700.0,
+        "program_duration_weeks": 16.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.666667,
+        "avg_temp_celsius": 0.590909,
+        "population_density_per_km2": 0.003625,
+        "distance_from_pgh_miles": 1.0,
+        "hrmi_quality_of_life_score": 0.883721,
+        "english_proficiency_ef_epi_2024": 1.0,
+        "program_duration_weeks": 1.0
+      },
+      "feature_vector": [
+        0.666667,
+        0.590909,
+        0.003625,
+        1.0,
+        0.883721,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "program_name": "Pitt in Amsterdam",
+      "primary_city": "Amsterdam",
+      "country": "Netherlands",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png",
+      "pro_text": "Bike-first infrastructure makes the entire city accessible without ever stepping into a car.",
+      "con_text": "Housing is severely constrained, so short-term student housing is scarce and overpriced.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1200.0,
+        "avg_temp_celsius": 10.0,
+        "population_density_per_km2": 5300.0,
+        "distance_from_pgh_miles": 3920.0,
+        "hrmi_quality_of_life_score": 89.0,
+        "english_proficiency_ef_epi_2024": 636.0,
+        "program_duration_weeks": 3.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.6,
+        "avg_temp_celsius": 0.227273,
+        "population_density_per_km2": 0.245283,
+        "distance_from_pgh_miles": 0.257325,
+        "hrmi_quality_of_life_score": 0.906977,
+        "english_proficiency_ef_epi_2024": 0.739837,
+        "program_duration_weeks": 0.133333
+      },
+      "feature_vector": [
+        0.6,
+        0.227273,
+        0.245283,
+        0.257325,
+        0.906977,
+        0.739837,
+        0.133333
+      ]
+    },
+    {
+      "program_name": "Dietrich to Berlin: History Politics Memory",
+      "primary_city": "Berlin",
+      "country": "Germany",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg",
+      "pro_text": "Unmatched modern history immersion \u2014 the Wall, Holocaust memorials, Cold War sites are all walkable.",
+      "con_text": "Long, dark, cold winters with very short daylight hours from November through February.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1100.0,
+        "avg_temp_celsius": 10.0,
+        "population_density_per_km2": 4200.0,
+        "distance_from_pgh_miles": 4300.0,
+        "hrmi_quality_of_life_score": 88.0,
+        "english_proficiency_ef_epi_2024": 605.0,
+        "program_duration_weeks": 16.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.533333,
+        "avg_temp_celsius": 0.227273,
+        "population_density_per_km2": 0.190665,
+        "distance_from_pgh_miles": 0.305732,
+        "hrmi_quality_of_life_score": 0.883721,
+        "english_proficiency_ef_epi_2024": 0.613821,
+        "program_duration_weeks": 1.0
+      },
+      "feature_vector": [
+        0.533333,
+        0.227273,
+        0.190665,
+        0.305732,
+        0.883721,
+        0.613821,
+        1.0
+      ]
+    },
+    {
+      "program_name": "International Internship Program: Madrid",
+      "primary_city": "Madrid",
+      "country": "Spain",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Madrid_-_Sky_Bar_360%C2%BA_%28Hotel_Riu_Plaza_Espa%C3%B1a%29%2C_vistas_19.jpg",
+      "pro_text": "Late-night culture: world-class tapas and nightlife that doesn\u2019t really start until 10pm.",
+      "con_text": "Brutal summer heat \u2014 temperatures regularly exceed 35\u00b0C (95\u00b0F) in July and August.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 850.0,
+        "avg_temp_celsius": 15.0,
+        "population_density_per_km2": 5400.0,
+        "distance_from_pgh_miles": 4000.0,
+        "hrmi_quality_of_life_score": 82.0,
+        "english_proficiency_ef_epi_2024": 540.0,
+        "program_duration_weeks": 10.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.366667,
+        "avg_temp_celsius": 0.454545,
+        "population_density_per_km2": 0.250248,
+        "distance_from_pgh_miles": 0.267516,
+        "hrmi_quality_of_life_score": 0.744186,
+        "english_proficiency_ef_epi_2024": 0.349593,
+        "program_duration_weeks": 0.6
+      },
+      "feature_vector": [
+        0.366667,
+        0.454545,
+        0.250248,
+        0.267516,
+        0.744186,
+        0.349593,
+        0.6
+      ]
+    },
+    {
+      "program_name": "Dietrich to Cyprus - University of Nicosia",
+      "primary_city": "Nicosia",
+      "country": "Cyprus",
+      "notes": "*HRMI estimate",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Nicosia%27s_skyline_2024.jpg",
+      "pro_text": "Last divided capital in Europe \u2014 uniquely lets you cross between EU and non-EU territory on foot.",
+      "con_text": "Limited international flight connections; you\u2019ll usually connect via Athens or Istanbul.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 850.0,
+        "avg_temp_celsius": 19.0,
+        "population_density_per_km2": 3200.0,
+        "distance_from_pgh_miles": 5840.0,
+        "hrmi_quality_of_life_score": 80.0,
+        "english_proficiency_ef_epi_2024": 580.0,
+        "program_duration_weeks": 16.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.366667,
+        "avg_temp_celsius": 0.636364,
+        "population_density_per_km2": 0.141013,
+        "distance_from_pgh_miles": 0.501911,
+        "hrmi_quality_of_life_score": 0.697674,
+        "english_proficiency_ef_epi_2024": 0.512195,
+        "program_duration_weeks": 1.0
+      },
+      "feature_vector": [
+        0.366667,
+        0.636364,
+        0.141013,
+        0.501911,
+        0.697674,
+        0.512195,
+        1.0
+      ]
+    },
+    {
+      "program_name": "Plus3 Engineering - Bilbao",
+      "primary_city": "Bilbao",
+      "country": "Spain",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Collage_de_Bilbao%2C_Pa%C3%ADs_Vasco%2C_Espa%C3%B1a.png",
+      "pro_text": "Home of the Guggenheim and gateway to Basque cuisine (pintxos) that locals consider Spain\u2019s best.",
+      "con_text": "Frequent rain year-round \u2014 one of the wettest major cities in Spain.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 850.0,
+        "avg_temp_celsius": 14.0,
+        "population_density_per_km2": 8400.0,
+        "distance_from_pgh_miles": 3940.0,
+        "hrmi_quality_of_life_score": 82.0,
+        "english_proficiency_ef_epi_2024": 540.0,
+        "program_duration_weeks": 2.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.366667,
+        "avg_temp_celsius": 0.409091,
+        "population_density_per_km2": 0.399206,
+        "distance_from_pgh_miles": 0.259873,
+        "hrmi_quality_of_life_score": 0.744186,
+        "english_proficiency_ef_epi_2024": 0.349593,
+        "program_duration_weeks": 0.066667
+      },
+      "feature_vector": [
+        0.366667,
+        0.409091,
+        0.399206,
+        0.259873,
+        0.744186,
+        0.349593,
+        0.066667
+      ]
+    },
+    {
+      "program_name": "Business Technology and Engineering the German Way",
+      "primary_city": "Munich",
+      "country": "Germany",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Stadtbild_M%C3%BCnchen.jpg",
+      "pro_text": "Cleanest, safest, and most efficient public transit of any major German city, plus the Alps are 1 hour away.",
+      "con_text": "Highest cost of living in Germany; rent and dining are noticeably more expensive than Berlin.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1200.0,
+        "avg_temp_celsius": 9.0,
+        "population_density_per_km2": 4700.0,
+        "distance_from_pgh_miles": 4460.0,
+        "hrmi_quality_of_life_score": 88.0,
+        "english_proficiency_ef_epi_2024": 605.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.6,
+        "avg_temp_celsius": 0.181818,
+        "population_density_per_km2": 0.215492,
+        "distance_from_pgh_miles": 0.326115,
+        "hrmi_quality_of_life_score": 0.883721,
+        "english_proficiency_ef_epi_2024": 0.613821,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.6,
+        0.181818,
+        0.215492,
+        0.326115,
+        0.883721,
+        0.613821,
+        0.2
+      ]
+    },
+    {
+      "program_name": "Comparative Economics of Central Europe",
+      "primary_city": "Prague",
+      "country": "Czech Republic",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Prague_%286365119737%29.jpg",
+      "pro_text": "Stunning preserved medieval architecture at some of the lowest prices in the EU.",
+      "con_text": "Old Town is overrun with tourists and stag parties, which can drown out local culture.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 850.0,
+        "avg_temp_celsius": 9.0,
+        "population_density_per_km2": 2700.0,
+        "distance_from_pgh_miles": 4460.0,
+        "hrmi_quality_of_life_score": 85.0,
+        "english_proficiency_ef_epi_2024": 580.0,
+        "program_duration_weeks": 3.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.366667,
+        "avg_temp_celsius": 0.181818,
+        "population_density_per_km2": 0.116187,
+        "distance_from_pgh_miles": 0.326115,
+        "hrmi_quality_of_life_score": 0.813953,
+        "english_proficiency_ef_epi_2024": 0.512195,
+        "program_duration_weeks": 0.133333
+      },
+      "feature_vector": [
+        0.366667,
+        0.181818,
+        0.116187,
+        0.326115,
+        0.813953,
+        0.512195,
+        0.133333
+      ]
+    },
+    {
+      "program_name": "Comparative Healthcare in Graz",
+      "primary_city": "Graz",
+      "country": "Austria",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Graz_%2835932179023%29.jpg",
+      "pro_text": "Compact UNESCO old town with a real student culture \u2014 roughly 1 in 5 residents is a university student.",
+      "con_text": "Limited international visibility means fewer English-speaking events and a steeper German barrier.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1000.0,
+        "avg_temp_celsius": 9.0,
+        "population_density_per_km2": 2300.0,
+        "distance_from_pgh_miles": 4560.0,
+        "hrmi_quality_of_life_score": 88.0,
+        "english_proficiency_ef_epi_2024": 616.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.466667,
+        "avg_temp_celsius": 0.181818,
+        "population_density_per_km2": 0.096326,
+        "distance_from_pgh_miles": 0.338854,
+        "hrmi_quality_of_life_score": 0.883721,
+        "english_proficiency_ef_epi_2024": 0.658537,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.466667,
+        0.181818,
+        0.096326,
+        0.338854,
+        0.883721,
+        0.658537,
+        0.2
+      ]
+    },
+    {
+      "program_name": "Culture Through Literature: Barcelona",
+      "primary_city": "Barcelona",
+      "country": "Spain",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Aerial_view_of_Barcelona%2C_Spain_%2851227309370%29_edited.jpg",
+      "pro_text": "Beach + mountains + Gaud\u00ed architecture in a single Mediterranean city \u2014 rare combination globally.",
+      "con_text": "Pickpocketing on metros and Las Ramblas is among the worst in Europe.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 900.0,
+        "avg_temp_celsius": 16.0,
+        "population_density_per_km2": 16000.0,
+        "distance_from_pgh_miles": 4140.0,
+        "hrmi_quality_of_life_score": 82.0,
+        "english_proficiency_ef_epi_2024": 540.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.4,
+        "avg_temp_celsius": 0.5,
+        "population_density_per_km2": 0.776564,
+        "distance_from_pgh_miles": 0.28535,
+        "hrmi_quality_of_life_score": 0.744186,
+        "english_proficiency_ef_epi_2024": 0.349593,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.4,
+        0.5,
+        0.776564,
+        0.28535,
+        0.744186,
+        0.349593,
+        0.2
+      ]
+    },
+    {
+      "program_name": "Healthcare Delivery in China",
+      "primary_city": "Beijing",
+      "country": "China",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Skyline_of_Beijing_CBD_with_B-5906_approaching_%2820211016171955%29_%281%29.jpg",
+      "pro_text": "Direct access to the Great Wall, Forbidden City, and 3,000 years of imperial history.",
+      "con_text": "Air quality can be hazardous in winter, and the Great Firewall blocks Google, Instagram, WhatsApp, etc.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 700.0,
+        "avg_temp_celsius": 13.0,
+        "population_density_per_km2": 1300.0,
+        "distance_from_pgh_miles": 7000.0,
+        "hrmi_quality_of_life_score": 70.0,
+        "english_proficiency_ef_epi_2024": 460.0,
+        "program_duration_weeks": 3.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.266667,
+        "avg_temp_celsius": 0.363636,
+        "population_density_per_km2": 0.046673,
+        "distance_from_pgh_miles": 0.649682,
+        "hrmi_quality_of_life_score": 0.465116,
+        "english_proficiency_ef_epi_2024": 0.02439,
+        "program_duration_weeks": 0.133333
+      },
+      "feature_vector": [
+        0.266667,
+        0.363636,
+        0.046673,
+        0.649682,
+        0.465116,
+        0.02439,
+        0.133333
+      ]
+    },
+    {
+      "program_name": "Healthcare Delivery in Switzerland",
+      "primary_city": "Basel",
+      "country": "Switzerland",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Basel_-_M%C3%BCnsterpfalz1.jpg",
+      "pro_text": "Trinational location \u2014 you can be in Germany or France within a 15-minute tram ride.",
+      "con_text": "Switzerland is the most expensive country in the world; a basic restaurant meal often exceeds $30.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1800.0,
+        "avg_temp_celsius": 11.0,
+        "population_density_per_km2": 7300.0,
+        "distance_from_pgh_miles": 4140.0,
+        "hrmi_quality_of_life_score": 92.0,
+        "english_proficiency_ef_epi_2024": 568.0,
+        "program_duration_weeks": 2.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 1.0,
+        "avg_temp_celsius": 0.272727,
+        "population_density_per_km2": 0.344588,
+        "distance_from_pgh_miles": 0.28535,
+        "hrmi_quality_of_life_score": 0.976744,
+        "english_proficiency_ef_epi_2024": 0.463415,
+        "program_duration_weeks": 0.066667
+      },
+      "feature_vector": [
+        1.0,
+        0.272727,
+        0.344588,
+        0.28535,
+        0.976744,
+        0.463415,
+        0.066667
+      ]
+    },
+    {
+      "program_name": "Himalayan Health",
+      "primary_city": "Mussoorie",
+      "country": "India",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Mussoorie_Snow_Over_Dehradun_%2814831297545%29.jpg",
+      "pro_text": "Himalayan foothill setting with sweeping mountain views and a slower, cooler escape from the Indian plains.",
+      "con_text": "Limited medical infrastructure and frequent monsoon landslides can disrupt travel into and out of town.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 300.0,
+        "avg_temp_celsius": 14.0,
+        "population_density_per_km2": 1300.0,
+        "distance_from_pgh_miles": 7400.0,
+        "hrmi_quality_of_life_score": 58.0,
+        "english_proficiency_ef_epi_2024": 490.0,
+        "program_duration_weeks": 6.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.0,
+        "avg_temp_celsius": 0.409091,
+        "population_density_per_km2": 0.046673,
+        "distance_from_pgh_miles": 0.700637,
+        "hrmi_quality_of_life_score": 0.186047,
+        "english_proficiency_ef_epi_2024": 0.146341,
+        "program_duration_weeks": 0.333333
+      },
+      "feature_vector": [
+        0.0,
+        0.409091,
+        0.046673,
+        0.700637,
+        0.186047,
+        0.146341,
+        0.333333
+      ]
+    },
+    {
+      "program_name": "International Internship Program: Paris",
+      "primary_city": "Paris",
+      "country": "France",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg",
+      "pro_text": "Arguably the densest concentration of world-class art, food, and architecture on the planet.",
+      "con_text": "Very crowded, can feel unwelcoming to non-French speakers, and pricey for caf\u00e9s and groceries.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1200.0,
+        "avg_temp_celsius": 12.0,
+        "population_density_per_km2": 20500.0,
+        "distance_from_pgh_miles": 3860.0,
+        "hrmi_quality_of_life_score": 85.0,
+        "english_proficiency_ef_epi_2024": 537.0,
+        "program_duration_weeks": 10.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.6,
+        "avg_temp_celsius": 0.318182,
+        "population_density_per_km2": 1.0,
+        "distance_from_pgh_miles": 0.249682,
+        "hrmi_quality_of_life_score": 0.813953,
+        "english_proficiency_ef_epi_2024": 0.337398,
+        "program_duration_weeks": 0.6
+      },
+      "feature_vector": [
+        0.6,
+        0.318182,
+        1.0,
+        0.249682,
+        0.813953,
+        0.337398,
+        0.6
+      ]
+    },
+    {
+      "program_name": "Inter-professional Studies in Northern Ireland",
+      "primary_city": "Belfast",
+      "country": "United Kingdom",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/StormontGeneral.jpg",
+      "pro_text": "Compact, friendly city with the Titanic Quarter and easy day trips to the Giant\u2019s Causeway.",
+      "con_text": "Lingering sectarian murals and peace walls are a reminder that political tensions are still recent.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1000.0,
+        "avg_temp_celsius": 10.0,
+        "population_density_per_km2": 2500.0,
+        "distance_from_pgh_miles": 3490.0,
+        "hrmi_quality_of_life_score": 80.0,
+        "english_proficiency_ef_epi_2024": 700.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.466667,
+        "avg_temp_celsius": 0.227273,
+        "population_density_per_km2": 0.106256,
+        "distance_from_pgh_miles": 0.202548,
+        "hrmi_quality_of_life_score": 0.697674,
+        "english_proficiency_ef_epi_2024": 1.0,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.466667,
+        0.227273,
+        0.106256,
+        0.202548,
+        0.697674,
+        1.0,
+        0.2
+      ]
+    },
+    {
+      "program_name": "International Internship Program: Dublin",
+      "primary_city": "Dublin",
+      "country": "Ireland",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Dublin_-_aerial_-_2025-07-07_01.jpg",
+      "pro_text": "English-speaking, deeply pub-centric culture with a strong literary heritage (Joyce, Yeats, Beckett).",
+      "con_text": "Dublin rents are now among the highest in Europe and the weather is famously wet and grey.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1200.0,
+        "avg_temp_celsius": 10.0,
+        "population_density_per_km2": 4800.0,
+        "distance_from_pgh_miles": 3440.0,
+        "hrmi_quality_of_life_score": 86.0,
+        "english_proficiency_ef_epi_2024": 700.0,
+        "program_duration_weeks": 10.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.6,
+        "avg_temp_celsius": 0.227273,
+        "population_density_per_km2": 0.220457,
+        "distance_from_pgh_miles": 0.196178,
+        "hrmi_quality_of_life_score": 0.837209,
+        "english_proficiency_ef_epi_2024": 1.0,
+        "program_duration_weeks": 0.6
+      },
+      "feature_vector": [
+        0.6,
+        0.227273,
+        0.220457,
+        0.196178,
+        0.837209,
+        1.0,
+        0.6
+      ]
+    },
+    {
+      "program_name": "International Internship Program: Seoul",
+      "primary_city": "Seoul",
+      "country": "South Korea",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg",
+      "pro_text": "Best public transit and 24/7 city services of almost any global capital \u2014 including all-night caf\u00e9s and food.",
+      "con_text": "Brutally competitive academic and work culture, plus long, polluted yellow-dust springs.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1000.0,
+        "avg_temp_celsius": 13.0,
+        "population_density_per_km2": 16000.0,
+        "distance_from_pgh_miles": 6930.0,
+        "hrmi_quality_of_life_score": 85.0,
+        "english_proficiency_ef_epi_2024": 510.0,
+        "program_duration_weeks": 10.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.466667,
+        "avg_temp_celsius": 0.363636,
+        "population_density_per_km2": 0.776564,
+        "distance_from_pgh_miles": 0.640764,
+        "hrmi_quality_of_life_score": 0.813953,
+        "english_proficiency_ef_epi_2024": 0.227642,
+        "program_duration_weeks": 0.6
+      },
+      "feature_vector": [
+        0.466667,
+        0.363636,
+        0.776564,
+        0.640764,
+        0.813953,
+        0.227642,
+        0.6
+      ]
+    },
+    {
+      "program_name": "International Internship Program: Stockholm",
+      "primary_city": "Stockholm",
+      "country": "Sweden",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Royal_Dramatic_Theatre_Stockholm.jpg",
+      "pro_text": "Spread across 14 islands \u2014 a uniquely beautiful archipelago city with excellent design culture.",
+      "con_text": "Winters bring as little as 6 hours of daylight, and almost everything (especially alcohol) is heavily taxed.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1150.0,
+        "avg_temp_celsius": 7.0,
+        "population_density_per_km2": 5200.0,
+        "distance_from_pgh_miles": 4170.0,
+        "hrmi_quality_of_life_score": 91.0,
+        "english_proficiency_ef_epi_2024": 610.0,
+        "program_duration_weeks": 10.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.566667,
+        "avg_temp_celsius": 0.090909,
+        "population_density_per_km2": 0.240318,
+        "distance_from_pgh_miles": 0.289172,
+        "hrmi_quality_of_life_score": 0.953488,
+        "english_proficiency_ef_epi_2024": 0.634146,
+        "program_duration_weeks": 0.6
+      },
+      "feature_vector": [
+        0.566667,
+        0.090909,
+        0.240318,
+        0.289172,
+        0.953488,
+        0.634146,
+        0.6
+      ]
+    },
+    {
+      "program_name": "Japan: Its People and Culture",
+      "primary_city": "Kobe",
+      "country": "Japan",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Kobe_Port_Tower_and_Maritime_Museum%2C_November_2016.jpg",
+      "pro_text": "Coastal Japanese city with mountains directly behind it; famous for beef and a relaxed pace vs. Tokyo.",
+      "con_text": "Earthquake-prone (still rebuilding cultural memory of 1995) and fairly expensive for Japan.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 850.0,
+        "avg_temp_celsius": 16.0,
+        "population_density_per_km2": 2700.0,
+        "distance_from_pgh_miles": 6560.0,
+        "hrmi_quality_of_life_score": 87.0,
+        "english_proficiency_ef_epi_2024": 454.0,
+        "program_duration_weeks": 5.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.366667,
+        "avg_temp_celsius": 0.5,
+        "population_density_per_km2": 0.116187,
+        "distance_from_pgh_miles": 0.593631,
+        "hrmi_quality_of_life_score": 0.860465,
+        "english_proficiency_ef_epi_2024": 0.0,
+        "program_duration_weeks": 0.266667
+      },
+      "feature_vector": [
+        0.366667,
+        0.5,
+        0.116187,
+        0.593631,
+        0.860465,
+        0.0,
+        0.266667
+      ]
+    },
+    {
+      "program_name": "Language Culture and African Socialism",
+      "primary_city": "Arusha",
+      "country": "Tanzania",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Arusha_City_view.jpg",
+      "pro_text": "Gateway to Mt. Kilimanjaro and the Serengeti \u2014 unrivaled access to East African wildlife.",
+      "con_text": "Limited healthcare infrastructure and you must take malaria prophylaxis for the whole stay.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 500.0,
+        "avg_temp_celsius": 19.0,
+        "population_density_per_km2": 360.0,
+        "distance_from_pgh_miles": 7940.0,
+        "hrmi_quality_of_life_score": 50.0,
+        "english_proficiency_ef_epi_2024": 480.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.133333,
+        "avg_temp_celsius": 0.636364,
+        "population_density_per_km2": 0.0,
+        "distance_from_pgh_miles": 0.769427,
+        "hrmi_quality_of_life_score": 0.0,
+        "english_proficiency_ef_epi_2024": 0.105691,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.133333,
+        0.636364,
+        0.0,
+        0.769427,
+        0.0,
+        0.105691,
+        0.2
+      ]
+    },
+    {
+      "program_name": "Pitt Greensburg: Student Teaching in New Zealand",
+      "primary_city": "Auckland",
+      "country": "New Zealand",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Auckland_skyline_-_May_2024_%282%29.jpg",
+      "pro_text": "Surrounded by water and volcanoes, with world-class hiking and beaches inside city limits.",
+      "con_text": "Most isolated major city on Earth \u2014 flights anywhere outside Oceania take 12+ hours.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1150.0,
+        "avg_temp_celsius": 16.0,
+        "population_density_per_km2": 1400.0,
+        "distance_from_pgh_miles": 8500.0,
+        "hrmi_quality_of_life_score": 85.0,
+        "english_proficiency_ef_epi_2024": 700.0,
+        "program_duration_weeks": 8.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.566667,
+        "avg_temp_celsius": 0.5,
+        "population_density_per_km2": 0.051639,
+        "distance_from_pgh_miles": 0.840764,
+        "hrmi_quality_of_life_score": 0.813953,
+        "english_proficiency_ef_epi_2024": 1.0,
+        "program_duration_weeks": 0.466667
+      },
+      "feature_vector": [
+        0.566667,
+        0.5,
+        0.051639,
+        0.840764,
+        0.813953,
+        1.0,
+        0.466667
+      ]
+    },
+    {
+      "program_name": "Pitt Johnstown: Global Changemakers",
+      "primary_city": "Cape Town",
+      "country": "South Africa",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Camps_bay_%2853460319478%29_%28cropped%29.jpg",
+      "pro_text": "Table Mountain + two oceans + wine country make it one of the most scenic cities on Earth.",
+      "con_text": "High violent crime rates and rolling power cuts (load-shedding) can disrupt daily life.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 700.0,
+        "avg_temp_celsius": 17.0,
+        "population_density_per_km2": 1500.0,
+        "distance_from_pgh_miles": 7750.0,
+        "hrmi_quality_of_life_score": 60.0,
+        "english_proficiency_ef_epi_2024": 600.0,
+        "program_duration_weeks": 16.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.266667,
+        "avg_temp_celsius": 0.545455,
+        "population_density_per_km2": 0.056604,
+        "distance_from_pgh_miles": 0.745223,
+        "hrmi_quality_of_life_score": 0.232558,
+        "english_proficiency_ef_epi_2024": 0.593496,
+        "program_duration_weeks": 1.0
+      },
+      "feature_vector": [
+        0.266667,
+        0.545455,
+        0.056604,
+        0.745223,
+        0.232558,
+        0.593496,
+        1.0
+      ]
+    },
+    {
+      "program_name": "Plus3 Business",
+      "primary_city": "Buenos Aires",
+      "country": "Argentina",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Puerto_Madero%2C_Buenos_Aires_%2840689219792%29_%28cropped%29.jpg",
+      "pro_text": "Vibrant European-feeling capital with world-class steakhouses, tango, and an extremely cheap dollar.",
+      "con_text": "Hyperinflation makes daily prices unstable and ATMs are unreliable for foreigners.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 550.0,
+        "avg_temp_celsius": 18.0,
+        "population_density_per_km2": 14500.0,
+        "distance_from_pgh_miles": 5300.0,
+        "hrmi_quality_of_life_score": 70.0,
+        "english_proficiency_ef_epi_2024": 555.0,
+        "program_duration_weeks": 2.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.166667,
+        "avg_temp_celsius": 0.590909,
+        "population_density_per_km2": 0.702085,
+        "distance_from_pgh_miles": 0.433121,
+        "hrmi_quality_of_life_score": 0.465116,
+        "english_proficiency_ef_epi_2024": 0.410569,
+        "program_duration_weeks": 0.066667
+      },
+      "feature_vector": [
+        0.166667,
+        0.590909,
+        0.702085,
+        0.433121,
+        0.465116,
+        0.410569,
+        0.066667
+      ]
+    },
+    {
+      "program_name": "Research and Culture in Senegal",
+      "primary_city": "Dakar",
+      "country": "Senegal",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Dakar-place-de-l%27Ind%C3%A9pendance.jpg",
+      "pro_text": "Atlantic-facing capital with a thriving music scene and one of West Africa\u2019s safest big cities.",
+      "con_text": "Heavy traffic, limited English usage outside hotels, and intense midday heat year-round.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 600.0,
+        "avg_temp_celsius": 25.0,
+        "population_density_per_km2": 12400.0,
+        "distance_from_pgh_miles": 4000.0,
+        "hrmi_quality_of_life_score": 52.0,
+        "english_proficiency_ef_epi_2024": 470.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.2,
+        "avg_temp_celsius": 0.909091,
+        "population_density_per_km2": 0.597815,
+        "distance_from_pgh_miles": 0.267516,
+        "hrmi_quality_of_life_score": 0.046512,
+        "english_proficiency_ef_epi_2024": 0.065041,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.2,
+        0.909091,
+        0.597815,
+        0.267516,
+        0.046512,
+        0.065041,
+        0.2
+      ]
+    },
+    {
+      "program_name": "Rome: Art Language and Culture",
+      "primary_city": "Rome",
+      "country": "Italy",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg",
+      "pro_text": "Living museum \u2014 you literally walk past 2,000-year-old ruins on the way to the grocery store.",
+      "con_text": "Public transit is unreliable, taxi scams target tourists, and August heat empties the city.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1000.0,
+        "avg_temp_celsius": 16.0,
+        "population_density_per_km2": 2200.0,
+        "distance_from_pgh_miles": 4720.0,
+        "hrmi_quality_of_life_score": 85.0,
+        "english_proficiency_ef_epi_2024": 553.0,
+        "program_duration_weeks": 6.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.466667,
+        "avg_temp_celsius": 0.5,
+        "population_density_per_km2": 0.09136,
+        "distance_from_pgh_miles": 0.359236,
+        "hrmi_quality_of_life_score": 0.813953,
+        "english_proficiency_ef_epi_2024": 0.402439,
+        "program_duration_weeks": 0.333333
+      },
+      "feature_vector": [
+        0.466667,
+        0.5,
+        0.09136,
+        0.359236,
+        0.813953,
+        0.402439,
+        0.333333
+      ]
+    },
+    {
+      "program_name": "Sociology of Sports and Tourism in Greece",
+      "primary_city": "Athens",
+      "country": "Greece",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Monastiraki_Square_and_Acropolis_in_Athens_%2844149181684%29.jpg",
+      "pro_text": "Birthplace of Western philosophy and democracy; the Acropolis is visible from much of the city.",
+      "con_text": "Air pollution and graffiti are widespread, and many central neighborhoods feel run-down.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 850.0,
+        "avg_temp_celsius": 18.0,
+        "population_density_per_km2": 17000.0,
+        "distance_from_pgh_miles": 5150.0,
+        "hrmi_quality_of_life_score": 80.0,
+        "english_proficiency_ef_epi_2024": 590.0,
+        "program_duration_weeks": 4.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.366667,
+        "avg_temp_celsius": 0.590909,
+        "population_density_per_km2": 0.826216,
+        "distance_from_pgh_miles": 0.414013,
+        "hrmi_quality_of_life_score": 0.697674,
+        "english_proficiency_ef_epi_2024": 0.552846,
+        "program_duration_weeks": 0.2
+      },
+      "feature_vector": [
+        0.366667,
+        0.590909,
+        0.826216,
+        0.414013,
+        0.697674,
+        0.552846,
+        0.2
+      ]
+    },
+    {
+      "program_name": "Student Teaching in Bolivia",
+      "primary_city": "Cochabamba",
+      "country": "Bolivia",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Cochabamba_City.jpg",
+      "pro_text": "Famous for the best food in Bolivia and a mild year-round spring-like climate at 8,400 ft.",
+      "con_text": "High altitude takes 1\u20132 weeks to acclimate to, and water/sanitation infrastructure is limited.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 400.0,
+        "avg_temp_celsius": 18.0,
+        "population_density_per_km2": 4200.0,
+        "distance_from_pgh_miles": 3800.0,
+        "hrmi_quality_of_life_score": 58.0,
+        "english_proficiency_ef_epi_2024": 460.0,
+        "program_duration_weeks": 16.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.066667,
+        "avg_temp_celsius": 0.590909,
+        "population_density_per_km2": 0.190665,
+        "distance_from_pgh_miles": 0.242038,
+        "hrmi_quality_of_life_score": 0.186047,
+        "english_proficiency_ef_epi_2024": 0.02439,
+        "program_duration_weeks": 1.0
+      },
+      "feature_vector": [
+        0.066667,
+        0.590909,
+        0.190665,
+        0.242038,
+        0.186047,
+        0.02439,
+        1.0
+      ]
+    },
+    {
+      "program_name": "Sustainable Engineering in Iceland",
+      "primary_city": "Reykjavik",
+      "country": "Iceland",
+      "notes": "*HRMI estimate",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Reykjav%C3%ADk%2C_view_from_Hallgr%C3%ADmskirkja_%282%29.jpg",
+      "pro_text": "Northern Lights, geothermal lagoons, and dramatic volcanic landscapes within a 30-minute drive.",
+      "con_text": "Only ~4 hours of daylight in deep winter, and food/alcohol prices are among the highest in the world.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1500.0,
+        "avg_temp_celsius": 5.0,
+        "population_density_per_km2": 480.0,
+        "distance_from_pgh_miles": 2910.0,
+        "hrmi_quality_of_life_score": 93.0,
+        "english_proficiency_ef_epi_2024": 615.0,
+        "program_duration_weeks": 1.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.8,
+        "avg_temp_celsius": 0.0,
+        "population_density_per_km2": 0.005958,
+        "distance_from_pgh_miles": 0.128662,
+        "hrmi_quality_of_life_score": 1.0,
+        "english_proficiency_ef_epi_2024": 0.654472,
+        "program_duration_weeks": 0.0
+      },
+      "feature_vector": [
+        0.8,
+        0.0,
+        0.005958,
+        0.128662,
+        1.0,
+        0.654472,
+        0.0
+      ]
+    },
+    {
+      "program_name": "Frederick Honors Portugal Internship Program",
+      "primary_city": "Lisbon",
+      "country": "Portugal",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Lisboa_-_Portugal_%2852597836992%29.jpg",
+      "pro_text": "Sunniest capital in Europe with affordable seafood, surfing beaches, and beautiful azulejo-tiled streets.",
+      "con_text": "Very steep, hilly cobblestone streets are exhausting daily and rough on luggage and ankles.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 850.0,
+        "avg_temp_celsius": 17.0,
+        "population_density_per_km2": 5500.0,
+        "distance_from_pgh_miles": 3700.0,
+        "hrmi_quality_of_life_score": 84.0,
+        "english_proficiency_ef_epi_2024": 597.0,
+        "program_duration_weeks": 8.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.366667,
+        "avg_temp_celsius": 0.545455,
+        "population_density_per_km2": 0.255214,
+        "distance_from_pgh_miles": 0.229299,
+        "hrmi_quality_of_life_score": 0.790698,
+        "english_proficiency_ef_epi_2024": 0.581301,
+        "program_duration_weeks": 0.466667
+      },
+      "feature_vector": [
+        0.366667,
+        0.545455,
+        0.255214,
+        0.229299,
+        0.790698,
+        0.581301,
+        0.466667
+      ]
+    },
+    {
+      "program_name": "Frederick Summer Research - Chinese University of Hong Kong",
+      "primary_city": "Hong Kong",
+      "country": "Hong Kong SAR",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Hong_Kong_Skyline_View_From_The_Peak_2024-12-13.jpg/1280px-Hong_Kong_Skyline_View_From_The_Peak_2024-12-13.jpg",
+      "pro_text": "Densest, most vertical city skyline on Earth with 24/7 dim sum and easy hikes minutes from skyscrapers.",
+      "con_text": "Extreme summer humidity, tiny apartments, and increasing political restrictions on speech.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1250.0,
+        "avg_temp_celsius": 23.0,
+        "population_density_per_km2": 6800.0,
+        "distance_from_pgh_miles": 8000.0,
+        "hrmi_quality_of_life_score": 78.0,
+        "english_proficiency_ef_epi_2024": 540.0,
+        "program_duration_weeks": 8.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.633333,
+        "avg_temp_celsius": 0.818182,
+        "population_density_per_km2": 0.319762,
+        "distance_from_pgh_miles": 0.77707,
+        "hrmi_quality_of_life_score": 0.651163,
+        "english_proficiency_ef_epi_2024": 0.349593,
+        "program_duration_weeks": 0.466667
+      },
+      "feature_vector": [
+        0.633333,
+        0.818182,
+        0.319762,
+        0.77707,
+        0.651163,
+        0.349593,
+        0.466667
+      ]
+    },
+    {
+      "program_name": "Global Service Learning: Puerto Rico",
+      "primary_city": "San Juan",
+      "country": "Puerto Rico",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/2013_Old_San_Juan_01.JPG",
+      "pro_text": "U.S. territory (no passport required) with Caribbean beaches and historic Old San Juan forts.",
+      "con_text": "Hurricane season (June\u2013November) can disrupt travel, and the power grid is fragile.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1100.0,
+        "avg_temp_celsius": 27.0,
+        "population_density_per_km2": 3000.0,
+        "distance_from_pgh_miles": 1900.0,
+        "hrmi_quality_of_life_score": 75.0,
+        "english_proficiency_ef_epi_2024": 700.0,
+        "program_duration_weeks": 1.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.533333,
+        "avg_temp_celsius": 1.0,
+        "population_density_per_km2": 0.131082,
+        "distance_from_pgh_miles": 0.0,
+        "hrmi_quality_of_life_score": 0.581395,
+        "english_proficiency_ef_epi_2024": 1.0,
+        "program_duration_weeks": 0.0
+      },
+      "feature_vector": [
+        0.533333,
+        1.0,
+        0.131082,
+        0.0,
+        0.581395,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "program_name": "Governance and Policy in Brussels",
+      "primary_city": "Brussels",
+      "country": "Belgium",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Grand_Place_Bruselas_2.jpg",
+      "pro_text": "Capital of the EU \u2014 unmatched access to European institutions, plus chocolate, waffles, and 1,000+ beers.",
+      "con_text": "Often described as grey and bureaucratic; weather is overcast for much of the year.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 1150.0,
+        "avg_temp_celsius": 11.0,
+        "population_density_per_km2": 7300.0,
+        "distance_from_pgh_miles": 3930.0,
+        "hrmi_quality_of_life_score": 88.0,
+        "english_proficiency_ef_epi_2024": 612.0,
+        "program_duration_weeks": 3.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.566667,
+        "avg_temp_celsius": 0.272727,
+        "population_density_per_km2": 0.344588,
+        "distance_from_pgh_miles": 0.258599,
+        "hrmi_quality_of_life_score": 0.883721,
+        "english_proficiency_ef_epi_2024": 0.642276,
+        "program_duration_weeks": 0.133333
+      },
+      "feature_vector": [
+        0.566667,
+        0.272727,
+        0.344588,
+        0.258599,
+        0.883721,
+        0.642276,
+        0.133333
+      ]
+    },
+    {
+      "program_name": "Plus3 Pitt Johnstown Business",
+      "primary_city": "Quito",
+      "country": "Ecuador",
+      "notes": "",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/FACHADA_ASAMBLEA_NACIONAL._QUITO%2C_20_DE_FEBRERO_2020._01.jpg",
+      "pro_text": "UNESCO-listed colonial old town sits at 9,350 ft on the equator \u2014 best-preserved historic center in the Americas.",
+      "con_text": "Altitude sickness is common on arrival and petty theft in tourist areas is a constant concern.",
+      "raw": {
+        "cost_of_living_usd_monthly_no_rent": 550.0,
+        "avg_temp_celsius": 14.0,
+        "population_density_per_km2": 4800.0,
+        "distance_from_pgh_miles": 2900.0,
+        "hrmi_quality_of_life_score": 62.0,
+        "english_proficiency_ef_epi_2024": 470.0,
+        "program_duration_weeks": 2.0
+      },
+      "normalized": {
+        "cost_of_living_usd_monthly_no_rent": 0.166667,
+        "avg_temp_celsius": 0.409091,
+        "population_density_per_km2": 0.220457,
+        "distance_from_pgh_miles": 0.127389,
+        "hrmi_quality_of_life_score": 0.27907,
+        "english_proficiency_ef_epi_2024": 0.065041,
+        "program_duration_weeks": 0.066667
+      },
+      "feature_vector": [
+        0.166667,
+        0.409091,
+        0.220457,
+        0.127389,
+        0.27907,
+        0.065041,
+        0.066667
+      ]
+    }
+  ]
+}

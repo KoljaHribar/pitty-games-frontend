@@ -1,0 +1,24 @@
+{
+  "name": "pitty-games-frontend",
+  "version": "1.0.0",
+  "description": "Static landing page and frontend logic for daily Pitt-themed games.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KoljaHribar/pitty-games-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KoljaHribar/pitty-games-frontend/issues"
+  },
+  "homepage": "https://github.com/KoljaHribar/pitty-games-frontend#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.103.3"
+  }
+}

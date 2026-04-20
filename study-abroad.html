@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Study Abroad Matcher — swipe through Pitt study abroad programs to find your match."
+    />
+    <title>Study Abroad Matcher — Pitty Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#study-abroad-main">Skip to matcher</a>
+
+    <header class="site-header" role="banner">
+      <div class="header-top">
+        <div class="header-spacer" aria-hidden="true"></div>
+        <div class="header-brand">
+          <h1 class="site-title">Pitty Games</h1>
+          <p class="site-tagline">Daily challenges for Panthers</p>
+        </div>
+        <nav class="header-auth" aria-label="Game navigation"></nav>
+      </div>
+    </header>
+
+    <main id="study-abroad-main" class="study-abroad-main" tabindex="-1">
+      <div class="study-abroad-back">
+        <a href="index.html" class="btn btn--solid">← Back</a>
+      </div>
+
+      <h2 class="study-abroad-title">Study Abroad Matcher</h2>
+      <p class="study-abroad-lede">
+        Swipe right to like a program, left to pass. Find the program that
+        fits you best.
+      </p>
+
+      <section
+        class="study-abroad-deck-wrap"
+        aria-labelledby="deck-heading"
+      >
+        <h3 id="deck-heading" class="visually-hidden">Program cards</h3>
+
+        <div
+          id="study-abroad-deck"
+          class="study-abroad-deck"
+          aria-live="polite"
+        >
+          <article
+            class="program-card"
+            data-program-id="placeholder-1"
+          >
+            <div class="program-card__image" aria-hidden="true">
+              <span class="program-card__image-placeholder">Program image</span>
+            </div>
+            <div class="program-card__body">
+              <h4 class="program-card__name">Program name</h4>
+              <p class="program-card__location">Location</p>
+              <div class="program-card__ai">
+                <div class="program-card__ai-row program-card__ai-row--pro">
+                  <span class="program-card__ai-label">AI Pro</span>
+                  <p class="program-card__ai-text">
+                    A reason this program could be a great fit for you.
+                  </p>
+                </div>
+                <div class="program-card__ai-row program-card__ai-row--con">
+                  <span class="program-card__ai-label">AI Con</span>
+                  <p class="program-card__ai-text">
+                    A potential drawback to keep in mind.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="program-card__stamp program-card__stamp--like"
+              aria-hidden="true"
+            >
+              Like
+            </div>
+            <div
+              class="program-card__stamp program-card__stamp--pass"
+              aria-hidden="true"
+            >
+              Pass
+            </div>
+          </article>
+        </div>
+
+        <p
+          id="study-abroad-empty"
+          class="study-abroad-empty"
+          hidden
+        >
+          You're out of programs! Refresh to start over.
+        </p>
+      </section>
+
+      <div class="study-abroad-actions">
+        <button
+          type="button"
+          id="study-abroad-pass"
+          class="btn btn--ghost study-abroad-action study-abroad-action--pass"
+          aria-label="Pass"
+        >
+          ✕ Pass
+        </button>
+        <button
+          type="button"
+          id="study-abroad-like"
+          class="btn btn--solid study-abroad-action study-abroad-action--like"
+          aria-label="Like"
+        >
+          ♥ Like
+        </button>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <script src="study-abroad.js" defer></script>
+  </body>
+</html>
