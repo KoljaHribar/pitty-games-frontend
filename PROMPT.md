@@ -423,3 +423,25 @@ Better. Add more bolts for each card. I like the fact that it is symetric, but m
 ### 7 — Replace lightning with scattered golden paw prints
 
 Delete the lightning bolts completely. Instead put golden footprints and paws on that empty white space right and left of the cards. Make the footprints be spread out, on random locations in that empty white space.
+
+## Crucial prompts (Student of the Day & Connections)
+
+### 1 — Add two more home-screen cards with placeholder pages
+
+Create two more cards on the home page. One card will be for the "Student of the Day" game and the other will be for the game "Connections". Do it the same way other cards are made. Make sure on the home screen that the paws footsteps extend to the 2 new cards as well. Create the .js and .html files for the 2 games. Dont make the games yet, whenever the user clicks on the card, it should give a message "in progress".
+
+### 2 — Student of the Day: daily rotating profile spotlight
+
+Make the following implementations for the Student of the Day segment. It shows a random student from the database, updated everyday at midnight like the other games. It would just be information about the student taken from the profiles table, presented in a modern and Pitt related way.
+
+### 3 — Connections: 3 shared-trait students with ABCD options
+
+Implement the following version of the Connections game: everyday show 3 different students that have something in common (same year, same high school, same freshman dorm...). The user should have ABCD options to guess from (ABCD options should be columns from the profiles table). Scoring should be handled and implemented as for the other games. The game should fundamentally operate the same way as the other games.
+
+### 4 — Reorder home-screen cards
+
+Move the Connections card to be in the middle right spot of the home screen and move the Study Abroad card into the bottom right spot of the home screen for cards.
+
+### 5 — Connections bug: show only names, not full profiles
+
+Bug in the Connections game: instead of just the names being visible, all the info associated to the students is shown. It should be just 3 names and then beneath them ABCD options. Fix the bug.

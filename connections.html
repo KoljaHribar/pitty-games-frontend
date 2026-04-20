@@ -8,7 +8,7 @@
     />
     <meta
       name="description"
-      content="Connections — coming soon to PittHub."
+      content="Connections — daily PittHub puzzle: three Panthers, one shared field. Can you spot it?"
     />
     <title>Connections — PittHub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,9 +18,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   </head>
   <body>
-    <a class="skip-link" href="#connections-main">Skip to content</a>
+    <a class="skip-link" href="#connections-main">Skip to game</a>
 
     <header class="site-header" role="banner">
       <div class="header-top">
@@ -43,16 +44,81 @@
       </div>
     </header>
 
-    <main id="connections-main" class="study-abroad-main" tabindex="-1">
-      <div class="study-abroad-back">
+    <main id="connections-main" class="connections-main" tabindex="-1">
+      <div class="connections-back">
         <a href="index.html" class="btn btn--solid">← Back</a>
       </div>
 
-      <h2 class="study-abroad-title">Connections</h2>
-      <p id="connections-status" class="study-abroad-lede">
-        In progress — check back soon.
+      <h2 class="connections-title">Connections</h2>
+      <p class="connections-lede">
+        Three Panthers, one thing in common. Pick the profile field that ties
+        them together.
       </p>
+
+      <p id="connections-stats" class="wordle-stats" hidden>
+        <span
+          >Score:
+          <strong id="connections-score" class="wordle-stats__num">0</strong>
+        </span>
+        <span class="wordle-stats__sep" aria-hidden="true">·</span>
+        <span
+          >Streak:
+          <strong id="connections-streak" class="wordle-stats__num">0</strong>
+        </span>
+      </p>
+
+      <p id="connections-error" class="guess-who-error" role="alert" hidden></p>
+
+      <section
+        class="connections-trio"
+        id="connections-trio"
+        aria-label="Today's three Panthers"
+      ></section>
+
+      <section
+        class="connections-question"
+        aria-labelledby="connections-question-title"
+      >
+        <h3
+          id="connections-question-title"
+          class="connections-question__title"
+        >
+          What field do they all share?
+        </h3>
+        <div
+          class="connections-options"
+          id="connections-options"
+          role="group"
+          aria-label="Answer choices"
+        ></div>
+      </section>
     </main>
+
+    <div
+      id="results-modal"
+      class="results-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="results-modal-title"
+      hidden
+    >
+      <div
+        class="results-modal__backdrop"
+        tabindex="-1"
+        aria-hidden="true"
+      ></div>
+      <div class="results-modal__panel">
+        <h2 id="results-modal-title" class="results-modal__title"></h2>
+        <p id="results-modal-target" class="results-modal__target"></p>
+        <p id="results-modal-explanation" class="results-modal__explanation"></p>
+        <p id="results-modal-stats" class="results-modal__stats"></p>
+        <div class="results-modal__actions">
+          <a href="index.html" class="btn btn--solid results-modal__home">
+            Back to home
+          </a>
+        </div>
+      </div>
+    </div>
 
     <script src="connections.js" defer></script>
   </body>

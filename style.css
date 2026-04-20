@@ -2325,3 +2325,212 @@ a.game-card.game-card--link:visited {
     transition: none;
   }
 }
+
+/* ============================================================
+   Connections
+   Three Panther "mini profile" cards + ABCD answer grid.
+   ============================================================ */
+
+.connections-main {
+  width: 100%;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.75rem)
+    max(1rem, calc(var(--safe-right) + 0.75rem))
+    clamp(2rem, 5vw, 3rem)
+    max(1rem, calc(var(--safe-left) + 0.75rem));
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.connections-back {
+  margin-bottom: 1rem;
+}
+
+.connections-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--pitt-blue);
+}
+
+.connections-lede {
+  margin: 0 0 1rem;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.connections-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.5vw, 0.9rem);
+  margin: 0.25rem 0 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .connections-trio {
+    grid-template-columns: 1fr;
+  }
+}
+
+.connections-student {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 20px rgba(0, 31, 92, 0.07);
+  padding: 1rem 0.9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.55rem;
+  border-top: 3px solid var(--pitt-gold);
+}
+
+.connections-student__avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--header-gradient);
+  color: var(--pitt-gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  border: 2px solid var(--pitt-gold);
+  flex: 0 0 auto;
+}
+
+.connections-student__index {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pitt-gold-deep);
+}
+
+.connections-student__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pitt-blue);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.connections-question {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem clamp(1rem, 2.5vw, 1.25rem) 1.15rem;
+  background: rgba(0, 53, 148, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--pitt-gold);
+}
+
+.connections-question__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pitt-blue);
+}
+
+.connections-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+@media (max-width: 480px) {
+  .connections-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.connections-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--surface-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.connections-option:hover:not(:disabled) {
+  background: rgba(0, 53, 148, 0.06);
+  border-color: rgba(0, 53, 148, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 31, 92, 0.1);
+}
+
+.connections-option:focus-visible {
+  outline: 3px solid var(--pitt-gold);
+  outline-offset: 2px;
+}
+
+.connections-option:disabled {
+  cursor: default;
+  opacity: 0.88;
+}
+
+.connections-option__letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: rgba(0, 53, 148, 0.1);
+  color: var(--pitt-blue);
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex: 0 0 auto;
+}
+
+.connections-option__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.connections-option.is-correct {
+  background: rgba(22, 163, 74, 0.12);
+  border-color: rgba(22, 163, 74, 0.5);
+  color: #14532d;
+  opacity: 1;
+}
+
+.connections-option.is-correct .connections-option__letter {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.connections-option.is-incorrect {
+  background: rgba(185, 28, 28, 0.08);
+  border-color: rgba(185, 28, 28, 0.45);
+  color: #7f1d1d;
+}
+
+.connections-option.is-incorrect .connections-option__letter {
+  background: #b91c1c;
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .connections-option {
+    transition: none;
+  }
+}
