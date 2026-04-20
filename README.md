@@ -1,8 +1,8 @@
-# Pitty Games (Frontend MVP)
+# PittHub
 
-Static landing page and frontend logic for daily Pitt-themed games.
+Static landing page and frontend logic for Pitt-themed games, tools and news.
 
-🎮 **Play the live version here:** [https://koljahribar.github.io/pitty-games-frontend/](https://koljahribar.github.io/pitty-games-frontend/)
+**Try the live version here:** [https://koljahribar.github.io/pitty-games-frontend/](https://koljahribar.github.io/pitty-games-frontend/)
 
 ## Files
 
@@ -12,4 +12,5 @@ Static landing page and frontend logic for daily Pitt-themed games.
 
 ## Deployment
 
-This site is automatically deployed via GitHub Pages. Any new commits pushed to the `main` (or `master`) branch will automatically rebuild and update the live website within a few minutes.
+This site is automatically deployed via GitHub Pages. 
+Any new commits pushed to the `main` branch will automatically rebuild and update the live website within a few minutes.
