@@ -103,6 +103,40 @@
         >
           You're out of programs! Refresh to start over.
         </p>
+
+        <div
+          id="study-abroad-result"
+          class="study-abroad-result"
+          role="region"
+          aria-labelledby="study-abroad-result-heading"
+          hidden
+        >
+          <p class="study-abroad-result__eyebrow">Your top match</p>
+          <h3
+            id="study-abroad-result-heading"
+            class="study-abroad-result__name"
+          ></h3>
+          <p class="study-abroad-result__location"></p>
+          <div class="study-abroad-result__image" aria-hidden="true"></div>
+          <p class="study-abroad-result__meta"></p>
+          <div class="study-abroad-result__why">
+            <span class="study-abroad-result__why-label">Why we picked it</span>
+            <p class="study-abroad-result__why-text"></p>
+          </div>
+          <div class="study-abroad-result__highlight" hidden>
+            <span class="study-abroad-result__why-label">What you'll love</span>
+            <p class="study-abroad-result__highlight-text"></p>
+          </div>
+          <div class="study-abroad-result__actions">
+            <button
+              type="button"
+              id="study-abroad-restart"
+              class="btn btn--solid"
+            >
+              Start over
+            </button>
+          </div>
+        </div>
       </section>
 
       <div class="study-abroad-actions">

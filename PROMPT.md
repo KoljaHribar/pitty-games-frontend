@@ -357,3 +357,35 @@ Use the most recent published values (2024/2025 from Numbeo, Worldometers, HRMI,
 
 ### 3 — Supabase table creation + app fetch integration
 Give me the SQL command to create a new Supabase table called study_abroad_programs. It needs the following columns: id (uuid), name (text), location (text), image_url (text), pro_text (text), con_text (text), and feature_vector (float array). Also, provide the JavaScript code to fetch all these rows in my app.js file using my existing Supabase client.
+
+### 4 — Seed script: upload normalized_programs.json to Supabase
+
+I have a JSON file named normalized_programs.json. The array of study abroad programs is located inside the "programs" key.
+
+I need to write a one-off Node.js script using the @supabase/supabase-js package to upload this data to my Supabase table named study_abroad_programs.
+
+Please write and run a script (seed.js) that reads the JSON file, iterates through the "programs" array, and maps the data to match my SQL columns exactly like this:
+
+- `name`: comes from `program_name`
+- `location`: combine `primary_city` and `country` (e.g., 'London, United Kingdom')
+- `image_url`: comes from `image_url`
+- `pro_text`: comes from `pro_text`
+- `con_text`: comes from `con_text`
+- `feature_vector`: comes from `feature_vector`
+
+### 5 — Study Abroad recommender: wire card stack to Supabase + Euclidean ranking
+
+Connect the Study Abroad card (currently placeholder) to the `study_abroad_programs` table and make it a real product. Each card's image is the row's `image_url`; the user swipes right (like) or left (pass).
+
+In `study-abroad.js`:
+- Initialize Supabase using the existing credentials from other game files.
+- On page load, fetch all rows from `study_abroad_programs` into `remainingPrograms`, and render the first few programs into the card-stack UI.
+- Create `userProfileVector` (array of floats, initially zeros) and a `likedCount` variable.
+- Implement an Euclidean distance helper between two numeric arrays.
+- On swipe right: average the liked program's `feature_vector` into `userProfileVector` (running mean).
+- Whenever `userProfileVector` updates, re-sort `remainingPrograms` ascending by Euclidean distance between the new profile vector and each program's `feature_vector`.
+- Ensure the next top card is always `remainingPrograms[0]` after sorting.
+
+### 6 — Top match results screen on deck empty
+
+Add a "Top match" results screen once the deck empties. Track liked programs during the session. When `remainingPrograms` is empty, hide the swipe actions and display the liked program closest (smallest Euclidean distance) to `userProfileVector` as the top match — show its image, name, location, a "Why you'll love it" block populated from `pro_text`, a "Based on N liked programs" meta line, and Start over / Back to home buttons. Handle the zero-likes case gracefully.

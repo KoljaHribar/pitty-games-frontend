@@ -1424,6 +1424,7 @@ a.game-card.game-card--link:visited {
 .study-abroad-deck-wrap {
   position: relative;
   width: 100%;
+  max-width: 26rem;
   margin: 0 auto 1.5rem;
 }
 
@@ -1432,8 +1433,11 @@ a.game-card.game-card--link:visited {
   width: 100%;
   /* Reserve vertical space for the absolutely-positioned cards. */
   height: clamp(28rem, 70vh, 36rem);
-  max-width: 26rem;
   margin: 0 auto;
+}
+
+.study-abroad-deck[hidden] {
+  display: none !important;
 }
 
 .study-abroad-empty {
@@ -1453,6 +1457,137 @@ a.game-card.game-card--link:visited {
 
 .study-abroad-empty[hidden] {
   display: none !important;
+}
+
+.study-abroad-result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background: var(--surface-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.study-abroad-result[hidden] {
+  display: none !important;
+}
+
+.study-abroad-result__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pitt-gold-deep);
+}
+
+.study-abroad-result__name {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 700;
+  color: var(--pitt-blue);
+  line-height: 1.15;
+}
+
+.study-abroad-result__location {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.study-abroad-result__image {
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+  aspect-ratio: 4 / 3;
+  margin: 0 auto 1.1rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 53, 148, 0.15),
+    rgba(255, 184, 28, 0.25)
+  );
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 18px rgba(0, 53, 148, 0.12);
+}
+
+.study-abroad-result__image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.study-abroad-result__meta {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+.study-abroad-result__meta strong {
+  color: var(--pitt-blue);
+  font-weight: 700;
+}
+
+.study-abroad-result__why,
+.study-abroad-result__highlight {
+  margin: 0 0 0.85rem;
+  padding: 0.9rem 1rem;
+  background: rgba(0, 53, 148, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+
+.study-abroad-result__highlight {
+  background: rgba(255, 184, 28, 0.1);
+  border-color: rgba(255, 184, 28, 0.35);
+}
+
+.study-abroad-result__highlight[hidden] {
+  display: none !important;
+}
+
+.study-abroad-result__why-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pitt-blue);
+  margin-bottom: 0.35rem;
+}
+
+.study-abroad-result__highlight .study-abroad-result__why-label {
+  color: var(--pitt-gold-deep);
+}
+
+.study-abroad-result__why-text,
+.study-abroad-result__highlight-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.study-abroad-result__actions {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.study-abroad-result__actions .btn {
+  min-width: 12rem;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .program-card {
