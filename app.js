@@ -414,7 +414,7 @@
       if (error) {
         alert(error.message);
       } else {
-        alert("Success! Check your email to confirm your account.");
+        alert("Success! Fill out your profile to get started.");
         if (data.session) {
           const { data: sess } = await supabase.auth.getSession();
           syncAccountNav(sess.session);

@@ -1,6 +1,6 @@
 # PittHub
 
-PittHub is an open community hub for University of Pittsburgh students — a shared
+PittHub is an open community hub for University of Pittsburgh students. It's a shared
 space to connect, play, and discover the people on your campus. It hosts a
 collection of Pitt-themed daily games and tools that are powered by real
 student profiles, so every game becomes a fun way to learn about other Panthers.
@@ -9,12 +9,11 @@ student profiles, so every game becomes a fun way to learn about other Panthers.
 
 ## How it works
 
-Students sign up, fill out a profile (home county, major, dorm, favorite dining
-option, most used bus, clubs, etc.), and can opt in to be featured as the
-answer to the daily games. Every day at local midnight, three different
-opted-in Panthers are automatically picked — one for Guess Who, one for
-Wordle, and one for Student of the Day — and the picks are identical for
-every player that day.
+Students sign up, fill out a profile (home county, major, dorm, clubs, etc.), 
+and can opt in to be featured as the
+answer to the daily games. Every day at local midnight different
+opted-in Panthers are automatically picked, one for Guess Who, one for
+Wordle, and one for Student of the Day.
 
 Accounts, profiles, game progress, and daily results are stored in
 [Supabase](https://supabase.com/), so stats and streaks follow you across
