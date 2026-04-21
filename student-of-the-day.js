@@ -110,6 +110,78 @@
     return `${first || ""} ${last || ""}`.trim();
   }
 
+  // Hashes the seed string into a 32-bit integer for mulberry32.
+  function xmur3(str) {
+    let h = 1779033703 ^ str.length;
+    for (let i = 0; i < str.length; i++) {
+      h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+      h = (h << 13) | (h >>> 19);
+    }
+    return function () {
+      h = Math.imul(h ^ (h >>> 16), 2246822507);
+      h = Math.imul(h ^ (h >>> 13), 3266489909);
+      h ^= h >>> 16;
+      return h >>> 0;
+    };
+  }
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0;
+      a = (a + 0x6d2b79f5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function seededShuffle(arr, seedStr) {
+    const seedFn = xmur3(seedStr);
+    const rand = mulberry32(seedFn());
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      const tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+    return a;
+  }
+
+  function hasUsableLastName(p) {
+    const raw = p && typeof p.last_name === "string" ? p.last_name : "";
+    return raw.replace(/[\s-]+/g, "").length > 0;
+  }
+
+  /**
+   * Deterministically pick one profile per daily game from an opted-in pool.
+   * Every client using the same date seed produces the same three picks, and
+   * the three slots are guaranteed to be distinct profiles.
+   *
+   * @param {Record<string, unknown>[]} optedIn
+   * @param {string} seedStr
+   */
+  function pickDailyProfiles(optedIn, seedStr) {
+    const shuffled = seededShuffle(optedIn, seedStr);
+    const guessWho = shuffled[0] || null;
+    let wordle = null;
+    let wordleIdx = -1;
+    for (let i = 1; i < shuffled.length; i++) {
+      if (hasUsableLastName(shuffled[i])) {
+        wordle = shuffled[i];
+        wordleIdx = i;
+        break;
+      }
+    }
+    let sotd = null;
+    for (let i = 1; i < shuffled.length; i++) {
+      if (i === wordleIdx) continue;
+      sotd = shuffled[i];
+      break;
+    }
+    return { guessWho, wordle, sotd };
+  }
+
   /**
    * @param {Record<string, unknown>} profile
    */
@@ -175,33 +247,26 @@
         dateEl.textContent = formatPrettyDate(today);
       }
 
-      const { data: puzzleRow, error: puzzleErr } = await supabase
-        .from("daily_puzzles")
-        .select("target_profile_id")
-        .eq("puzzle_date", todayStr)
-        .maybeSingle();
+      const { data: allRows, error: allErr } = await supabase
+        .from("profiles")
+        .select("*");
 
-      if (puzzleErr) {
-        console.error(puzzleErr);
+      if (allErr || !allRows) {
+        console.error(allErr);
         showError("Could not load today’s student. Please try again later.");
         return;
       }
-      if (!puzzleRow || !puzzleRow.target_profile_id) {
-        showError("No student has been selected for today yet — check back soon.");
+
+      const optedIn = allRows.filter((p) => p && p.is_opted_in);
+      if (optedIn.length < 3) {
+        showError(
+          "Not enough opted-in Panthers yet — check back once more have joined in."
+        );
         return;
       }
 
-      const { data: profileRow, error: profileErr } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", puzzleRow.target_profile_id)
-        .maybeSingle();
-
-      if (profileErr) {
-        console.error(profileErr);
-        showError("Could not load today’s Panther profile.");
-        return;
-      }
+      const picks = pickDailyProfiles(optedIn, todayStr);
+      const profileRow = picks.sotd;
       if (!profileRow) {
         showError("Today’s Panther could not be found.");
         return;
